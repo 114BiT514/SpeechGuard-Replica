@@ -1,0 +1,32 @@
+name: speechguard
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - ffmpeg
+  # MFA 强制对齐（Linux/WSL2 安装最稳；Windows 原生不保证可用）
+  - montreal-forced-aligner
+  - pip:
+      # 本地开发用 CPU 版 torch 即可；ModelArts 昇腾实例使用预装 torch + torch_npu，
+      # 不要在云上执行本文件覆盖 CANN/torch_npu 环境
+      - torch>=2.1
+      - torchaudio
+      - speechbrain>=1.0
+      - transformers
+      - pydub
+      - soundfile
+      - librosa
+      - numpy
+      - scipy
+      - matplotlib
+      - jiwer
+      - pyeer
+      - pycryptodome
+      - gradio
+      - pyyaml
+      - tqdm
+      # 以下按需安装（较重，用到再装）：
+      # - nemo_toolkit        # TitaNet-Large（M3 选参实验用，NeMo 官方渠道安装）
+      # - charm-crypto        # CP-ABE（M5，编译失败则降级 AES+权限组分发方案）

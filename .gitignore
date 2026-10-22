@@ -1,0 +1,35 @@
+# 数据与大文件（走网盘/OBS，不进 git）
+data/*
+!data/.gitkeep
+weights/
+*.pt
+*.ckpt
+*.bin
+*.th
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+.env
+.ipynb_checkpoints/
+
+# 测试与工具缓存
+.pytest_cache/
+.mfa/                  # MFA 声学模型与对齐缓存
+.coverage
+htmlcov/
+
+# 输出产物（保留图表结果，忽略临时音频）
+experiments/results/tmp/
+*.wav.tmp
+
+# IDE / 系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

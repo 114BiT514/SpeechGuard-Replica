@@ -24,6 +24,15 @@ def sqrt_hann(n: int) -> np.ndarray:
     return np.sqrt(0.5 - 0.5 * np.cos(2.0 * np.pi * i / n))
 
 
+def frames_centered(wav, frame_len: int = FRAME_LEN, hop: int | None = None):
+    """波形 → (带 centering 补零的帧矩阵, pad)。stft 内部与 warping 模块共用，
+    保证各模块看到的帧网格一致。"""
+    hop = DEFAULT_HOP if hop is None else hop
+    x = np.asarray(wav, dtype=np.float64).ravel()
+    x = np.concatenate([np.zeros(CENTER_PAD), x])
+    return make_frames(x, frame_len, hop)
+
+
 def stft(wav, frame_len: int = FRAME_LEN, hop: int | None = None, window: np.ndarray | None = None):
     """波形 → (逐帧频谱, pad)。
 
@@ -32,9 +41,7 @@ def stft(wav, frame_len: int = FRAME_LEN, hop: int | None = None, window: np.nda
     """
     hop = DEFAULT_HOP if hop is None else hop
     w = sqrt_hann(frame_len) if window is None else np.asarray(window, dtype=np.float64)
-    x = np.asarray(wav, dtype=np.float64).ravel()
-    x = np.concatenate([np.zeros(CENTER_PAD), x])
-    frames, pad = make_frames(x, frame_len, hop)
+    frames, pad = frames_centered(wav, frame_len, hop)
     spec = np.fft.rfft(frames * w, n=frame_len, axis=-1)
     return spec, pad
 

@@ -49,7 +49,7 @@ python -m app.main
 
 | 里程碑 | 状态 |
 |---|---|
-| M1 环境/数据/仓库 | ✅ 环境就绪+冒烟通过；LibriSpeech/VCTK 就位；剩余：华为云开卡、自录集、精读笔记 |
+| M1 环境/数据/仓库 | ✅ 环境就绪+冒烟通过；LibriSpeech/VCTK 就位；华为云 NPU 已验收；剩余：自录集、精读笔记 |
 | M2 声音匿名化核心 | ☐ |
 | M3 匿名化效果验证 | ☐ |
 | M4 内容保护 | ☐ |
@@ -70,3 +70,5 @@ python -m app.main
 - **数据集**：LibriSpeech test-clean（2620 条✓）/ dev-clean（2703 条✓）已解压至 `data/librispeech/LibriSpeech/`；VCTK 0.92（silence-trimmed FLAC 版，109 个说话人、88,328 条 flac + `txt/` 转写 + `speaker-info.txt`）解压于 `data/vctk/wav48_silence_trimmed/`（官方源直连仅 ~20KB/s，取自 hf-mirror 镜像 `duanyu027/vctk_0.92`；注意 `wav48_silence_trimmed/` 下的 `log.txt` 和 `s5/` 不是说话人，加载时过滤）。
 - **MFA**：本机无 WSL，且 MFA 不支持 Windows 原生 → M4 开工时先装 WSL2 + Ubuntu 建 mfa 环境；备选方案 whisperX 词级时间戳。
 - **Clash 代理**：`127.0.0.1:7890`；国际源（OpenSLR、HF）国内直连极慢，务必走代理；curl 走代理需加 `--ssl-no-revoke`（Schannel 证书吊销检查会失败）。
+
+> M1 云端部分已完成（2026-10-23）：华为云 ModelArts 昇腾 910B4 环境、ECAPA 与 Conformer 的 NPU 推理均已验证通过，详见 [M1 华为云 NPU 验收报告](docs/M1_华为云NPU验收报告.md)。

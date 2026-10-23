@@ -1,5 +1,7 @@
 # 华为云 ModelArts + 昇腾部署（M7 填写）
 
+> M1 已完成云端环境验收（910B4 + CANN 8.0.0 + torch_npu 2.1.0），创建实例、依赖安装、权重下载与 NPU 推理的完整步骤见 [M1 华为云 NPU 验收报告](../docs/M1_华为云NPU验收报告.md)。
+
 目标：整套系统（pipeline + Gradio 前端）部署到华为云 ModelArts 昇腾 NPU 实例，公网可访问。
 
 口径：华为云 ModelArts + 昇腾 NPU（910B/310P）+ torch_npu（PyTorch 昇腾适配层）+ OBS 存储。

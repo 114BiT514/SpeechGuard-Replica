@@ -49,7 +49,7 @@ python -m app.main
 
 | 里程碑 | 状态 |
 |---|---|
-| M1 环境/数据/仓库 | 🚧 进行中 |
+| M1 环境/数据/仓库 | ✅ 环境就绪+冒烟通过；LibriSpeech/VCTK 就位；剩余：华为云开卡、自录集、精读笔记 |
 | M2 声音匿名化核心 | ☐ |
 | M3 匿名化效果验证 | ☐ |
 | M4 内容保护 | ☐ |
@@ -57,3 +57,16 @@ python -m app.main
 | M6 前端 + 可视化 | ☐ |
 | M7 华为云部署 + 加分项 | ☐ |
 | M8 报告 + 验收 | ☐ |
+
+## 环境备忘（重要，后续里程碑开工前先读）
+
+- **环境**：Miniconda 位于 `E:\Miniconda`（未加入 PATH，用全路径调用），环境名 `speechguard`（python 3.10）。调用方式：`E:/Miniconda/envs/speechguard/python.exe`；ffmpeg 已由 conda 装入该环境。
+- **深度学习栈**：torch **2.8.0+cu128** + torchaudio 2.8.0（torchaudio 已停止更新、最高 2.8.0，必须与 torch 版本配对；RTX 4060 驱动 617.42 支持 cu128）。本地 GPU 推理已验证可用。
+- **HuggingFace 访问**：hf-mirror 的 API 现返回 401，改走 Clash 代理直连官方源：
+  `export HTTPS_PROXY=http://127.0.0.1:7890 HTTP_PROXY=http://127.0.0.1:7890 HF_HOME=E:/project/SpeechGuard-Replica/data/hf-cache`
+- **模型替换说明（WavLM → wav2vec2）**：论文用 WavLM 做离线转写，但 `facebook/wavlm-large` 在 Hub 已被 gate（401）。改用 `facebook/wav2vec2-large-960h-lv60-self`——论文 Table 3 本身就把 wav2vec2 列为对比的 SD 模型（clean 错误率 5.00% vs WavLM 4.04%），报告中如实注明即可。
+- **已缓存模型**：`data/pretrained/` 内 ECAPA-TDNN（85MB）、Conformer ASR（786MB，SpeechBrain COPY 策略落盘）；`data/hf-cache/` 内 BERT-NER（dbmdz）、wav2vec2-960h。
+- **SpeechBrain on Windows 两个坑**：① 无符号链接特权 → 所有 `from_hparams` 必须传 `local_strategy=LocalStrategy.COPY_SKIP_CACHE`；② 反斜杠路径会被内部处理吃掉 → 传给 speechbrain 的文件路径一律 `replace("\\","/")`。参考 `scripts/smoke_test.py`。
+- **数据集**：LibriSpeech test-clean（2620 条✓）/ dev-clean（2703 条✓）已解压至 `data/librispeech/LibriSpeech/`；VCTK 0.92（silence-trimmed FLAC 版，109 个说话人、88,328 条 flac + `txt/` 转写 + `speaker-info.txt`）解压于 `data/vctk/wav48_silence_trimmed/`（官方源直连仅 ~20KB/s，取自 hf-mirror 镜像 `duanyu027/vctk_0.92`；注意 `wav48_silence_trimmed/` 下的 `log.txt` 和 `s5/` 不是说话人，加载时过滤）。
+- **MFA**：本机无 WSL，且 MFA 不支持 Windows 原生 → M4 开工时先装 WSL2 + Ubuntu 建 mfa 环境；备选方案 whisperX 词级时间戳。
+- **Clash 代理**：`127.0.0.1:7890`；国际源（OpenSLR、HF）国内直连极慢，务必走代理；curl 走代理需加 `--ssl-no-revoke`（Schannel 证书吊销检查会失败）。

@@ -1,0 +1,338 @@
+{
+ "baseline": {
+  "eer": 0.0,
+  "wer": 0.02727272727272727
+ },
+ "n_speakers": 8,
+ "utts_per_spk": 3,
+ "conditions": [
+  {
+   "tag": "baseline",
+   "n": "",
+   "dist_lo": "",
+   "dist_hi": "",
+   "eer": 0.0,
+   "wer": 0.0273
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.0,
+   "dist_hi": 0.1,
+   "eer": 0.0,
+   "wer": 0.0236
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.1,
+   "dist_hi": 0.2,
+   "eer": 0.025,
+   "wer": 0.04
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.2,
+   "dist_hi": 0.3,
+   "eer": 0.0833,
+   "wer": 0.0818
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.3,
+   "dist_hi": 0.4,
+   "eer": 0.0833,
+   "wer": 0.0964
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.4,
+   "dist_hi": 0.5,
+   "eer": 0.25,
+   "wer": 0.2182
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.5,
+   "dist_hi": 0.6,
+   "eer": 0.375,
+   "wer": 0.3055
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.6,
+   "dist_hi": 0.7,
+   "eer": 0.2667,
+   "wer": 0.2764
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.7,
+   "dist_hi": 0.8,
+   "eer": 0.2917,
+   "wer": 0.4582
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.8,
+   "dist_hi": 0.9,
+   "eer": 0.2917,
+   "wer": 0.6345
+  },
+  {
+   "tag": "fig7",
+   "n": 1,
+   "dist_lo": 0.9,
+   "dist_hi": 1.0,
+   "eer": 0.2917,
+   "wer": 0.6273
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.0,
+   "dist_hi": 0.1,
+   "eer": 0.0,
+   "wer": 0.0345
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.1,
+   "dist_hi": 0.2,
+   "eer": 0.0722,
+   "wer": 0.0382
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.2,
+   "dist_hi": 0.3,
+   "eer": 0.0833,
+   "wer": 0.0855
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.3,
+   "dist_hi": 0.4,
+   "eer": 0.1139,
+   "wer": 0.1109
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.4,
+   "dist_hi": 0.5,
+   "eer": 0.2333,
+   "wer": 0.22
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.5,
+   "dist_hi": 0.6,
+   "eer": 0.25,
+   "wer": 0.4364
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.6,
+   "dist_hi": 0.7,
+   "eer": 0.3056,
+   "wer": 0.3855
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.7,
+   "dist_hi": 0.8,
+   "eer": 0.2694,
+   "wer": 0.6073
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.8,
+   "dist_hi": 0.9,
+   "eer": 0.25,
+   "wer": 0.6455
+  },
+  {
+   "tag": "table2",
+   "n": 2,
+   "dist_lo": 0.9,
+   "dist_hi": 1.0,
+   "eer": 0.3,
+   "wer": 0.7709
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.0,
+   "dist_hi": 0.1,
+   "eer": 0.0,
+   "wer": 0.0382
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.1,
+   "dist_hi": 0.2,
+   "eer": 0.0833,
+   "wer": 0.06
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.2,
+   "dist_hi": 0.3,
+   "eer": 0.1028,
+   "wer": 0.0818
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.3,
+   "dist_hi": 0.4,
+   "eer": 0.2083,
+   "wer": 0.24
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.4,
+   "dist_hi": 0.5,
+   "eer": 0.1667,
+   "wer": 0.24
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.5,
+   "dist_hi": 0.6,
+   "eer": 0.25,
+   "wer": 0.3309
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.6,
+   "dist_hi": 0.7,
+   "eer": 0.25,
+   "wer": 0.3727
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.7,
+   "dist_hi": 0.8,
+   "eer": 0.225,
+   "wer": 0.5782
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.8,
+   "dist_hi": 0.9,
+   "eer": 0.25,
+   "wer": 0.6509
+  },
+  {
+   "tag": "table2",
+   "n": 5,
+   "dist_lo": 0.9,
+   "dist_hi": 1.0,
+   "eer": 0.375,
+   "wer": 0.7673
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.0,
+   "dist_hi": 0.1,
+   "eer": 0.0833,
+   "wer": 0.0345
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.1,
+   "dist_hi": 0.2,
+   "eer": 0.0472,
+   "wer": 0.0945
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.2,
+   "dist_hi": 0.3,
+   "eer": 0.125,
+   "wer": 0.14
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.3,
+   "dist_hi": 0.4,
+   "eer": 0.175,
+   "wer": 0.2073
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.4,
+   "dist_hi": 0.5,
+   "eer": 0.2306,
+   "wer": 0.3509
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.5,
+   "dist_hi": 0.6,
+   "eer": 0.2917,
+   "wer": 0.4309
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.6,
+   "dist_hi": 0.7,
+   "eer": 0.2806,
+   "wer": 0.4182
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.7,
+   "dist_hi": 0.8,
+   "eer": 0.1667,
+   "wer": 0.6909
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.8,
+   "dist_hi": 0.9,
+   "eer": 0.3778,
+   "wer": 0.6982
+  },
+  {
+   "tag": "table2",
+   "n": 10,
+   "dist_lo": 0.9,
+   "dist_hi": 1.0,
+   "eer": 0.2917,
+   "wer": 0.72
+  }
+ ]
+}

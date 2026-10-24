@@ -1,0 +1,95 @@
+子集：24 条（8 说话人 × 3）
+加载 ECAPA...
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\modules\module.py:1355: UserWarning: expandable_segments not supported on this platform (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\c10/cuda/CUDAAllocatorConfig.h:35.)
+  return t.to(
+加载 Conformer...
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+[baseline] 原始: EER=0.00% WER=2.73% (148s)
+   转写样例: MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL || 参考: MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL
+  pool n=1 (0.0,0.1): 40 组
+  pool n=1 (0.1,0.2): 40 组
+  pool n=1 (0.2,0.3): 40 组
+  pool n=1 (0.3,0.4): 40 组
+  pool n=1 (0.4,0.5): 40 组
+  pool n=1 (0.5,0.6): 40 组
+  pool n=1 (0.6,0.7): 40 组
+  pool n=1 (0.7,0.8): 40 组
+  pool n=1 (0.8,0.9): 40 组
+  pool n=1 (0.9,1.0): 40 组
+  pool n=2 (0.0,0.1): 40 组
+  pool n=2 (0.1,0.2): 40 组
+  pool n=2 (0.2,0.3): 40 组
+  pool n=2 (0.3,0.4): 40 组
+  pool n=2 (0.4,0.5): 40 组
+  pool n=2 (0.5,0.6): 40 组
+  pool n=2 (0.6,0.7): 40 组
+  pool n=2 (0.7,0.8): 40 组
+  pool n=2 (0.8,0.9): 40 组
+  pool n=2 (0.9,1.0): 40 组
+  pool n=5 (0.0,0.1): 40 组
+  pool n=5 (0.1,0.2): 40 组
+  pool n=5 (0.2,0.3): 40 组
+  pool n=5 (0.3,0.4): 40 组
+  pool n=5 (0.4,0.5): 40 组
+  pool n=5 (0.5,0.6): 40 组
+  pool n=5 (0.6,0.7): 40 组
+  pool n=5 (0.7,0.8): 40 组
+  pool n=5 (0.8,0.9): 40 组
+  pool n=5 (0.9,1.0): 40 组
+  pool n=10 (0.0,0.1): 40 组
+  pool n=10 (0.1,0.2): 40 组
+  pool n=10 (0.2,0.3): 40 组
+  pool n=10 (0.3,0.4): 40 组
+  pool n=10 (0.4,0.5): 40 组
+  pool n=10 (0.5,0.6): 40 组
+  pool n=10 (0.6,0.7): 40 组
+  pool n=10 (0.7,0.8): 40 组
+  pool n=10 (0.8,0.9): 40 组
+  pool n=10 (0.9,1.0): 40 组
+[fig7] n=1 dist=(0.0,0.1): EER=0.00% WER=2.36% (134s)
+[fig7] n=1 dist=(0.1,0.2): EER=2.50% WER=4.00% (52s)
+[fig7] n=1 dist=(0.2,0.3): EER=8.33% WER=8.18% (41s)
+[fig7] n=1 dist=(0.3,0.4): EER=8.33% WER=9.64% (151s)
+[fig7] n=1 dist=(0.4,0.5): EER=25.00% WER=21.82% (142s)
+[fig7] n=1 dist=(0.5,0.6): EER=37.50% WER=30.55% (123s)
+[fig7] n=1 dist=(0.6,0.7): EER=26.67% WER=27.64% (188s)
+[fig7] n=1 dist=(0.7,0.8): EER=29.17% WER=45.82% (164s)
+[fig7] n=1 dist=(0.8,0.9): EER=29.17% WER=63.45% (170s)
+[fig7] n=1 dist=(0.9,1.0): EER=29.17% WER=62.73% (167s)
+[table2] n=2 dist=(0.0,0.1): EER=0.00% WER=3.45% (164s)
+[table2] n=2 dist=(0.1,0.2): EER=7.22% WER=3.82% (177s)
+[table2] n=2 dist=(0.2,0.3): EER=8.33% WER=8.55% (156s)
+[table2] n=2 dist=(0.3,0.4): EER=11.39% WER=11.09% (150s)
+[table2] n=2 dist=(0.4,0.5): EER=23.33% WER=22.00% (115s)
+[table2] n=2 dist=(0.5,0.6): EER=25.00% WER=43.64% (135s)
+[table2] n=2 dist=(0.6,0.7): EER=30.56% WER=38.55% (147s)
+[table2] n=2 dist=(0.7,0.8): EER=26.94% WER=60.73% (87s)
+[table2] n=2 dist=(0.8,0.9): EER=25.00% WER=64.55% (170s)
+[table2] n=2 dist=(0.9,1.0): EER=30.00% WER=77.09% (189s)
+[table2] n=5 dist=(0.0,0.1): EER=0.00% WER=3.82% (158s)
+[table2] n=5 dist=(0.1,0.2): EER=8.33% WER=6.00% (160s)
+[table2] n=5 dist=(0.2,0.3): EER=10.28% WER=8.18% (160s)
+[table2] n=5 dist=(0.3,0.4): EER=20.83% WER=24.00% (166s)
+[table2] n=5 dist=(0.4,0.5): EER=16.67% WER=24.00% (159s)
+[table2] n=5 dist=(0.5,0.6): EER=25.00% WER=33.09% (160s)
+[table2] n=5 dist=(0.6,0.7): EER=25.00% WER=37.27% (172s)
+[table2] n=5 dist=(0.7,0.8): EER=22.50% WER=57.82% (167s)
+[table2] n=5 dist=(0.8,0.9): EER=25.00% WER=65.09% (161s)
+[table2] n=5 dist=(0.9,1.0): EER=37.50% WER=76.73% (172s)
+[table2] n=10 dist=(0.0,0.1): EER=8.33% WER=3.45% (148s)
+[table2] n=10 dist=(0.1,0.2): EER=4.72% WER=9.45% (151s)
+[table2] n=10 dist=(0.2,0.3): EER=12.50% WER=14.00% (154s)
+[table2] n=10 dist=(0.3,0.4): EER=17.50% WER=20.73% (154s)
+[table2] n=10 dist=(0.4,0.5): EER=23.06% WER=35.09% (150s)
+[table2] n=10 dist=(0.5,0.6): EER=29.17% WER=43.09% (161s)
+[table2] n=10 dist=(0.6,0.7): EER=28.06% WER=41.82% (161s)
+[table2] n=10 dist=(0.7,0.8): EER=16.67% WER=69.09% (168s)
+[table2] n=10 dist=(0.8,0.9): EER=37.78% WER=69.82% (161s)
+[table2] n=10 dist=(0.9,1.0): EER=29.17% WER=72.00% (158s)
+saved: E:\project\SpeechGuard-Replica\experiments\results\exp1_dist_scan.csv
+saved: fig_exp1_fig7.png, fig_exp1_table2.png, exp1_summary.json

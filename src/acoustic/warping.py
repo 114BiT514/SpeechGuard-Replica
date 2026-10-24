@@ -8,25 +8,36 @@
 - 逆函数：m⁻¹(ω,α,β) = m(ω,β,α)（α、β 互换），这是"可恢复"的全部来源；
 - 公式(4)：扭曲强度 dist = ∫₀^π |F(ω)−ω| dω；论文 §5.1 限定 dist∈(0.5,0.6)、n∈[1,10]。
 
-实现说明与已知局限（报告将展开，亦是加分项素材）：
-- 采用**无重叠矩形块**处理（hop = 36ms，与论文公式(5)的帧语义一致）：
-  块 → DFT → 逐段扭曲 → IDFT → 块。恢复与保护共用同一管线，仅把 m 换成 m⁻¹。
-- **精细 DTFT 网格必须整除覆盖 DFT 网格**：FINE_N = 16×FRAME_LEN。若不成整数倍
-  （如 8192/576=14.22），恒等映射也要跨网格缝隙线性插值，roundtrip 直接崩坏
+实现说明与已知局限（完整证据链见 scripts/variant_probe*.py 与 M3 实验，报告将展开）：
+- **块级处理（默认）**：无重叠 36ms 块（hop=FRAME_LEN，与论文公式(5)帧语义一致），
+  块 → DFT → 逐段扭曲（段内各帧共用参数）→ IDFT。
+- **精细网格必须整除覆盖 DFT 网格**：FINE_N = 16×FRAME_LEN。若不成整数倍
+  （如 8192/576=14.22），恒等映射也要跨网格缝隙插值，roundtrip 直接崩坏
   （实测恒等仅 13dB；修复后恒等 ≈300dB）。
-- **离散化不可逆（固有损失，非 bug）**：论文 §4.2.2 的逆在连续意义下精确，但离散
-  实现中（a）分片线性映射在 knots 处的斜率间断与（b）矩形窗谱峰的巨大导数相乘，
-  使映射后谱的傅里叶系数衰减变慢，有限块 DFT 表示产生 O(1) 截断误差；表现为
-  roundtrip SNR 随参数抽样波动（实测 median≈6dB，min≈1dB，max≈20dB）。
-  论文 §5.2 自己承认"actual implementation operations such as interpolation
-  result in differences from the original results"，且其恢复质量为 EER 7.07% /
-  WER 9.90%（原始 WER 2.46%）——恢复有损与本文实现一致。M3 将以恢复后
-  EER/WER（而非波形 SNR）作为复现对齐指标；M7 加分项可探索改进恢复管线。
 - **斜率约束**：论文只约束 α、β 严格递增与 dist 范围；纯随机抽样会以可观概率产生
-  数十倍局部斜率。此处约束分段斜率 ∈ [0.5, 2]（VTLN 常规范围），报告中注明。
+  数十倍局部斜率。此处约束分段斜率 ∈ [0.5, 2]（VTLN 常规范围）。代价：抗
+  reducing 攻击成功率从论文的 ≈16-18% 升到 ≈42%（M3 exp2 已量化）。
 - **参数构造**：Dirichlet 切段 + 斜率偏差加权中心化（保证终点约束与斜率界限严格
   成立），仅对 dist 做拒绝采样；独立排序抽样在斜率受限时对 n≥8 几乎不可行。
-- 每个 VAD 段（含无声段）独立一组参数，段内所有帧共用；过短段先合并。
+- **实现变体的 EER/WER 权衡（M3 实测，dev-clean 8人×3条，ECAPA/Conformer）**：
+  块级 rect（本默认）：WER 30.6% / EER 37.5% —— EER 与论文 40.09% 对齐，
+  WER 远差于论文 3.58%（块边界伪影）；
+  段级整体 DFT（仅有声）：WER 13.6% / EER 1.4%；
+  OLA 加窗合成：WER 2.6% / EER 3.3%（合成干净但 ECAPA 对平稳扭曲近乎免疫）；
+  细粒度不合并：WER 93% / EER 22.5%（破坏式）。
+  **结论：干净频域扭曲无法同时复现论文的 (WER 3.58%, EER 40%) 组合——ECAPA 对
+  温和频域扭曲近乎免疫，论文的高 EER 很可能依赖其实现的处理损伤。** 离散化
+  不可逆与该权衡构成本复现的核心发现（对应论文自述"interpolation result in
+  differences"，恢复 EER 7.07%/WER 9.90% 亦有损）。
+  后续检验（scripts/vocoder_resynth + variant_probe）：
+  - 假说1"扭曲+声码器重建"：证伪。块级扭曲→HiFi-GAN 重合成 WER=3.27%（优于
+    论文）但 EER=0.83%——声码器洗掉块伪影后，暴露出频域扭曲本身对 ECAPA 无效。
+  - 假说3"斜率约束过温和"：证伪。论文原味抽样（斜率达 11.3）块级 EER=25%，
+    反而低于约束版 37.5%。
+  - 假说2"TitaNet-Large 对扭曲更敏感"：证伪。TitaNet 对块级保护音频 EER=0.0%
+    （ECAPA 同音频 37.5%）——比 ECAPA 更鲁棒；genuine 相似度 0.855 vs 原始 0.864。
+  **最终结论：论文 (WER 3.58%, EER 40%) 工作点无法由披露公式的任何忠实实现复现，
+  详见 docs/M3_reproduction_findings.md（含完整证据表与作者邮件行动项）。**
 """
 from __future__ import annotations
 
@@ -90,9 +101,13 @@ def inverse_multi_warp(omega, alpha, beta) -> np.ndarray:
     return multi_warp(omega, beta, alpha)
 
 
-def distortion_strength(alpha=None, beta=None, warp=None, n_grid: int = 20001) -> float:
-    """公式(4)：dist = ∫₀^π |F(ω)−ω| dω（梯形数值积分）。identity 时为 0。"""
-    grid = np.linspace(0.0, PI, n_grid)
+def distortion_strength(alpha=None, beta=None, warp=None, n_grid: int = 20001,
+                        grid: np.ndarray | None = None) -> float:
+    """公式(4)：dist = ∫₀^π |F(ω)−ω| dω（梯形数值积分）。identity 时为 0。
+
+    warp(grid) 应返回与 grid 同形状的映射值；传入 grid 时 n_grid 被忽略。
+    """
+    grid = np.linspace(0.0, PI, n_grid) if grid is None else np.asarray(grid, dtype=np.float64)
     f = warp(grid) if warp is not None else multi_warp(grid, alpha, beta)
     trapz = getattr(np, "trapezoid", None) or np.trapz
     return float(trapz(np.abs(f - grid), grid))
@@ -168,9 +183,15 @@ def _warp_frames(frames: np.ndarray, omega: np.ndarray, freq_map) -> np.ndarray:
     return out
 
 
-def _apply(wav, archive=None, n=None, dist_range=DIST_RANGE, rng=None, invert=False):
-    """protect/recover 共用管线：invert=False 扭曲（保护），True 逆扭曲（恢复）。"""
+def _apply(wav, archive=None, n=None, dist_range=DIST_RANGE, rng=None, invert=False,
+           param_pool=None):
+    """protect/recover 共用管线：invert=False 扭曲（保护），True 逆扭曲（恢复）。
+
+    param_pool: [(alpha, beta, dist)] 预生成参数池——dist 高端区间的拒绝采样较慢，
+    批量实验时按 (n, dist_range) 预构建复用；每个段从池中随机抽取。
+    """
     wav = np.asarray(wav, dtype=np.float64).ravel()
+    rng = np.random.default_rng() if rng is None else rng
     frames, spec, omega = _frame_view(wav)
     new_spec = spec.copy()
 
@@ -179,7 +200,10 @@ def _apply(wav, archive=None, n=None, dist_range=DIST_RANGE, rng=None, invert=Fa
         segs = merge_short_segments(segmentation(flags), MIN_SEG_FRAMES)
         archive = []
         for fs, fe, _voiced in segs:
-            alpha, beta, d = gen_params(n, dist_range, rng)
+            if param_pool:
+                alpha, beta, d = param_pool[rng.integers(len(param_pool))]
+            else:
+                alpha, beta, d = gen_params(n, dist_range, rng)
             new_spec[fs:fe + 1] = _warp_frames(
                 frames[fs:fe + 1], omega,
                 lambda w, a=alpha, b=beta: multi_warp(w, a, b),
@@ -197,10 +221,16 @@ def _apply(wav, archive=None, n=None, dist_range=DIST_RANGE, rng=None, invert=Fa
     return out_frames.ravel()[: wav.size]
 
 
-def protect(wav, n: int | None = None, dist_range=DIST_RANGE, rng=None):
+def protect(wav, n: int | None = None, dist_range=DIST_RANGE, rng=None,
+            param_pool: list | None = None):
     """声音匿名化（论文 §4.2）。返回 (protected_wav, archive)，
-    archive 为逐段 SegmentParams 列表，即恢复所需的密钥材料（论文的参数集 S）。"""
-    return _apply(wav, n=n, dist_range=dist_range, rng=rng, invert=False)
+    archive 为逐段 SegmentParams 列表，即恢复所需的密钥材料（论文的参数集 S）。
+
+    param_pool: 预生成的 [(alpha, beta, dist)] 池；给出时每段从池中抽取，
+    忽略 n 与 dist_range（池生成时已固定）。
+    """
+    return _apply(wav, n=n, dist_range=dist_range, rng=rng, invert=False,
+                  param_pool=param_pool)
 
 
 def recover(wav_protected, archive: list[SegmentParams]):

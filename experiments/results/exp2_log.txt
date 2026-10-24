@@ -1,0 +1,24 @@
+[总体][constrained] 成功率 42.13%（本实现）
+[总体][raw 论文原味] 成功率 19.02%（论文基准 15.87%）
+[Fig.8][constrained] n_true= 2: 成功率 43.10%
+[Fig.8][raw] n_true= 2: 成功率 24.00%
+[Fig.8][constrained] n_true= 4: 成功率 43.10%
+[Fig.8][raw] n_true= 4: 成功率 17.50%
+[Fig.8][constrained] n_true= 6: 成功率 42.80%
+[Fig.8][raw] n_true= 6: 成功率 13.40%
+[Fig.8][constrained] n_true= 8: 成功率 39.30%
+[Fig.8][raw] n_true= 8: 成功率 14.80%
+[Fig.8][constrained] n_true=10: 成功率 41.80%
+[Fig.8][raw] n_true=10: 成功率 13.60%
+[Fig.8][constrained] n_true=12: 成功率 41.70%
+[Fig.8][raw] n_true=12: 成功率 15.80%
+[Fig.8][constrained] n_true=14: 成功率 43.90%
+[Fig.8][raw] n_true=14: 成功率 18.00%
+[Fig.8][constrained] n_true=16: 成功率 45.10%
+[Fig.8][raw] n_true=16: 成功率 15.80%
+[Fig.8][constrained] n_true=18: 成功率 44.40%
+[Fig.8][raw] n_true=18: 成功率 14.90%
+[Fig.8][constrained] n_true=20: 成功率 45.60%
+[Fig.8][raw] n_true=20: 成功率 14.00%
+saved: E:\project\SpeechGuard-Replica\experiments\results\fig_exp2_fig8.png
+saved: E:\project\SpeechGuard-Replica\experiments\results\exp2_reducing_attack.csv

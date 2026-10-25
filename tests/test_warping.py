@@ -117,13 +117,13 @@ def _make_signal(seconds=1.0, sr=16000):
 
 
 def test_protect_recover_roundtrip():
-    """闭环恢复质量：与论文行为对齐（论文自述恢复有损：WER 9.9% vs 原始 2.46%），
-    故断言的是"恢复显著优于错误密钥、且能量/结构基本保留"而非波形级精确。"""
+    """闭环恢复质量（block 模式）：论文自述恢复有损（WER 9.9% vs 原始 2.46%），
+    断言"恢复显著优于错误密钥、结构基本保留"。"""
     x = _make_signal()
     snrs = []
     for seed in range(5):
-        prot, archive = protect(x, rng=np.random.default_rng(seed))
-        rec = recover(prot, archive)
+        prot, archive = protect(x, rng=np.random.default_rng(seed), mode="block")
+        rec = recover(prot, archive, mode="block")
         snrs.append(10 * np.log10(np.sum(x ** 2) / max(np.sum((x - rec) ** 2), 1e-30)))
         assert len(archive) >= 3, "首尾静音+中段语音应至少分成 3 段"
         for seg in archive:
@@ -132,6 +132,18 @@ def test_protect_recover_roundtrip():
     # 纯合成谐和信号是谱峰最尖锐的最坏情况；真语 medians 更高（实测 ~6dB），M3 用 EER/WER 验收
     assert np.median(snrs) >= 2.0, f"恢复 SNR 中位数过低：{np.median(snrs):.1f} dB"
     assert min(snrs) >= 0.0, f"存在灾难性恢复：{min(snrs):.1f} dB"
+
+
+def test_single_mode_structure():
+    """single 模式（默认）：整句单一映射 → archive 恰 1 段，恢复可用。"""
+    x = _make_signal(0.6)
+    prot, archive = protect(x, rng=np.random.default_rng(3))
+    assert len(archive) == 1
+    assert 0.5 <= archive[0].dist <= 0.6
+    rec = recover(prot, archive)
+    assert rec.shape == x[: prot.size].shape or len(rec) >= x[: prot.size].shape[0]
+    snr = 10 * np.log10(np.sum(x ** 2) / max(np.sum((x - rec[: x.size]) ** 2), 1e-30))
+    assert snr > 0.0, f"single 恢复 SNR 过低：{snr:.1f} dB"
 
 
 def test_protect_changes_spectrum():

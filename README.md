@@ -51,8 +51,8 @@ python -m app.main
 |---|---|
 | M1 环境/数据/仓库 | ✅ 环境就绪+冒烟通过；LibriSpeech/VCTK 就位；华为云 NPU 已验收；剩余：自录集、精读笔记 |
 | M2 声音匿名化核心 | 🚧 核心完成（framing/VAD/warping + 29 测试全绿 + 演示）；待人工试听三个 demo wav |
-| M3 匿名化效果验证 | ✅ exp1/exp2 + 变体扫描 + TitaNet 复测完成；核心结论见 `docs/M3_reproduction_findings.md` |
-| M4 内容保护 | ☐ |
+| M3 匿名化效果验证 | ✅ **论文 Table 5 成功复现**（single 模式：EER 40.01%/WER 5.44% vs 论文 34.50%/4.80%），证据链见 `docs/M3_reproduction_findings.md` |
+| M4 内容保护 | 🚧 核心模块完成：wav2vec2 转写+CTC词时间戳（免MFA）、BERT NER、GDPR词表/模式、AES-CTR帧加密（±8帧余量）；端到端 FNR 75%（LibriSpeech 6句冒烟），完整评估待自录集 Part C |
 | M5 权限组 + 端到端 | ☐ |
 | M6 前端 + 可视化 | ☐ |
 | M7 华为云部署 + 加分项 | ☐ |

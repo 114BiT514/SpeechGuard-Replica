@@ -1,0 +1,10 @@
+{
+ "n_utts": 2620,
+ "n_spk": 40,
+ "eer_original": 0.0161,
+ "eer_protected": 0.3298,
+ "wer_original": 0.0208,
+ "wer_protected": 0.4298,
+ "wer_subset": 300,
+ "elapsed_s": 3087.1
+}

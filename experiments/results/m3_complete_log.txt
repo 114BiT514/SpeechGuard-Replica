@@ -1,0 +1,25 @@
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+== 1. test-clean 攻击后列 + RTC ==
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  [attacked] EER=40.29% WER=17.80% (664s)
+  [RTC] protect=0.008 recover=0.007 (论文 0.32/0.26)
+== 2. VCTK（40人×65句）==
+  [vctk_ori] EER=1.59% WER=4.01% (116s)
+  [vctk_pro] EER=39.44% WER=11.30% (122s)
+  [vctk_att] EER=41.75% (25s)
+== 3. Fig.7 single 扫描（dev-clean 25人×40句）==
+  n=1 (0.0,0.1): EER=5.20% WER=2.44%
+  n=1 (0.1,0.2): EER=14.44% WER=2.46%
+  n=1 (0.2,0.3): EER=19.55% WER=2.34%
+  n=1 (0.3,0.4): EER=32.16% WER=2.87%
+  n=1 (0.4,0.5): EER=37.37% WER=3.60%
+  n=1 (0.5,0.6): EER=40.89% WER=4.88%
+  n=1 (0.6,0.7): EER=45.17% WER=4.14%
+  n=1 (0.7,0.8): EER=45.56% WER=16.08%
+  n=1 (0.8,0.9): EER=44.04% WER=9.61%
+  n=1 (0.9,1.0): EER=45.89% WER=17.48%
+ALL DONE 5458.7 s

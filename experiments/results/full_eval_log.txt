@@ -1,0 +1,20 @@
+test-clean: 2620 utts, 40 speakers
+加载 ECAPA...
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+加载 Conformer...
+[原始] EER=1.61% (论文 1.47%) | 335s
+  protect 500/2620 (441s)
+  protect 1000/2620 (510s)
+  protect 1500/2620 (593s)
+  protect 2000/2620 (649s)
+  protect 2500/2620 (729s)
+[保护] EER=32.98% (论文 34.50%) | 1025s
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+[原始] WER=2.08% on 300 utts (论文全集 2.46%) | 1889s
+[保护] WER=42.98% on 300 utts (论文 4.80%) | 3087s
+saved: E:\project\SpeechGuard-Replica\experiments\results\full_testclean_eval.json
+{"n_utts": 2620, "n_spk": 40, "eer_original": 0.0161, "eer_protected": 0.3298, "wer_original": 0.0208, "wer_protected": 0.4298, "wer_subset": 300, "elapsed_s": 3087.1}

@@ -1,0 +1,50 @@
+扫描 test-clean 采样（CTC 转写 + 自动检测）...
+W1026 00:25:11.970000 32160 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 27659.06it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-large-960h-lv60-self
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:   2%|▏         | 7/391 [00:00<00:07, 52.51it/s]Loading weights:   3%|▎         | 13/391 [00:00<00:08, 43.38it/s]Loading weights:   5%|▌         | 21/391 [00:00<00:07, 46.31it/s]Loading weights:   7%|▋         | 26/391 [00:00<00:10, 35.26it/s]Loading weights:   8%|▊         | 30/391 [00:00<00:09, 36.24it/s]Loading weights:   9%|▊         | 34/391 [00:00<00:09, 36.41it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 436.23it/s]
+[transformers] [1mBertForTokenClassification LOAD REPORT[0m from: dbmdz/bert-large-cased-finetuned-conll03-english
+Key                      | Status     |  | 
+-------------------------+------------+--+-
+bert.pooler.dense.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+采样 60 句（扫描 759 句）/ 用时 81s ，敏感词共 142 个
+缓存命中 0/300
+加载 Conformer（test_beam_size=4，与 M3 WER 评估同配置）...
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+转写 300 条音频 ...
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  30/300（32s，288s 后完成）
+  60/300（169s，675s 后完成）
+  90/300（206s，481s 后完成）
+  120/300（328s，493s 后完成）
+  150/300（475s，475s 后完成）
+  180/300（529s，353s 后完成）
+  210/300（619s，265s 后完成）
+  240/300（676s，169s 后完成）
+  270/300（708s，79s 后完成）
+  300/300（744s，0s 后完成）
+Ori: 敏感词 140，ASR 识别 128，FNR=8.57%（论文 ≈0.6%）
+Enc margin= 4帧: FNR=96.43%（论文 Enc≈95.88%） 仍识别 5/140  整句WER=29.58%  加密帧占比=26.8%
+Enc margin= 8帧: FNR=98.57%（论文 Enc≈95.88%） 仍识别 2/140  整句WER=36.40%  加密帧占比=33.5%
+Enc margin=12帧: FNR=97.86%（论文 Enc≈95.88%） 仍识别 3/140  整句WER=40.10%  加密帧占比=40.0%
+Enc margin=16帧: FNR=98.57%（论文 Enc≈95.88%） 仍识别 2/140  整句WER=44.78%  加密帧占比=46.0%
+saved -> E:\project\SpeechGuard-Replica\experiments\results\fnr_eval.json
+
+[诊断] margin=16 仍被识别的词（共 2）:
+  ner:ORG: 2
+  WIZARD         dur=0.30s src=ner:ORG          utt=..\1284-1181-0017.flac
+  LAMP           dur=0.38s src=ner:ORG          utt=..300-131720-0026.flac

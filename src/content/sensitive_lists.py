@@ -41,7 +41,7 @@ DEFAULT_PATTERNS: list[tuple[str, "re.Pattern[str]"]] = [
         r"(?:\b(?:ZERO|ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE)\b[ ,]?){7,12}")),
     ("date", re.compile(
         r"\b(?:JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|"
-        r"NOVEMBER|DECEMBER)\b(?:\s+\w+){0,3}")),
+        r"NOVEMBER|DECEMBER)\b")),
     ("address", re.compile(
         r"\b(?:APT|APARTMENT|STREET|ROAD|AVENUE|LANE|BOULEVARD|DRIVE)\b")),
     ("id_number", re.compile(r"\b[A-Z]{0,2}\d{6,}\b")),

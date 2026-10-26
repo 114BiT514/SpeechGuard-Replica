@@ -1,0 +1,36 @@
+{
+  "trials": 10000,
+  "protocol": "reducing \u653b\u51fb\uff08\u8bba\u6587 \u00a75.2 / Fig.10\uff09\uff1a\u5224\u636e dist(m_att\u207b\u00b9\u2218m_true)<dist(m_true)\uff1b\u4fdd\u62a4\u4e0e\u653b\u51fb\u5148\u9a8c\u5747\u6821\u51c6 dist\u2208(0.5,0.6)\uff1bspeechguard \u53cc\u62bd\u6837\u5e76\u62a5\uff08raw=\u8bba\u6587\u72ec\u7acb\u6392\u5e8f\u5747\u5300\u62bd\u6837\uff1bconstrained=\u672c\u5b9e\u73b0\u659c\u7387\u7ea6\u675f\uff0c\u4ee3\u4ef7\u89c1 exp2/M3 findings\uff09",
+  "rates": {
+    "single": {
+      "success_rate": 0.5734,
+      "median_dist_after_attack": 0.04359096731163321,
+      "dist_true": 0.5513,
+      "seconds": 7.3
+    },
+    "mcadams": {
+      "success_rate": 0.4024,
+      "median_dist_after_attack": 0.6906876708042211,
+      "dist_true": 0.5501,
+      "seconds": 5.0
+    },
+    "overo": {
+      "success_rate": 0.4966,
+      "median_dist_after_attack": 1.0068951339255452,
+      "dist_true": 0.5573,
+      "seconds": 16.9
+    },
+    "speechguard_raw": {
+      "success_rate": 0.1474,
+      "median_dist_after_attack": 0.7514258604054211,
+      "dist_true": 0.5156,
+      "seconds": 16.7
+    },
+    "speechguard_constrained": {
+      "success_rate": 0.4622,
+      "median_dist_after_attack": 0.7584411429973206,
+      "dist_true": 0.5972,
+      "seconds": 29.8
+    }
+  }
+}

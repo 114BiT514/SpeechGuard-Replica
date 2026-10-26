@@ -1,0 +1,42 @@
+{
+  "audio_s": 9.635,
+  "sensitive_items": [
+    {
+      "text": "MUSIC",
+      "category": "ner:ORG",
+      "t0": 0.58,
+      "t1": 0.96
+    },
+    {
+      "text": "SHELLEY'S",
+      "category": "ner:ORG",
+      "t0": 4.32,
+      "t1": 4.8
+    }
+  ],
+  "archive_segments": 1,
+  "outputs": {
+    "wav": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\publish.wav",
+    "mp3": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\publish.mp3",
+    "mp3_enc": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\publish.enc.mp3",
+    "mp3_quiet": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\publish.quiet.mp3",
+    "vault": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\vault.json",
+    "sk_admin": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\sk_admin.json",
+    "sk_collab": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\sk_collab.json"
+  },
+  "listen": {
+    "public": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\listen_public.mp3",
+    "collab": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\listen_collab.mp3",
+    "admin": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\listen_admin.mp3"
+  },
+  "recover": {
+    "collab": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\recovered_voice_only.wav",
+    "admin": "E:\\project\\SpeechGuard-Replica\\assets\\pipeline_demo\\recovered_full.wav"
+  },
+  "recover_snr_db": 5.186611548640458,
+  "rtc": {
+    "audio_s": 9.635,
+    "protect": 0.15390229225158691,
+    "publish": 0.27728271484375
+  }
+}

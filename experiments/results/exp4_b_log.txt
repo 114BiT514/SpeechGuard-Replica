@@ -1,0 +1,20 @@
+B 部分：126 句 / 最多 12 说话人
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  [single/prot] EER=33.78% WER=52.35%
+  [single/att] EER=33.73% WER=52.37%
+  [single/rec] EER=12.47% WER=51.28%
+  [mcadams/prot] EER=40.56% WER=58.56%
+  [mcadams/att] EER=43.15% WER=61.90%
+  [mcadams/rec] EER=12.40% WER=50.69%
+  [overo/prot] EER=39.00% WER=50.90%
+  [overo/att] EER=42.90% WER=61.97%
+  [overo/rec] EER=14.17% WER=50.56%
+  [speechguard/prot] EER=39.62% WER=2.44%
+  [speechguard/att] EER=43.30% WER=12.64%
+  [speechguard/rec] EER=10.67% WER=1.05%
+saved exp4_compare.json

@@ -1,0 +1,452 @@
+{
+  "protocol": {
+    "dataset": "LibriSpeech test-clean",
+    "n_utts": 60,
+    "asr_eval": "speechbrain/asr-conformer-transformerlm-librispeech",
+    "timestamps": "wav2vec2-large-960h-lv60-self CTC",
+    "margins_frames": [
+      4,
+      8,
+      12,
+      16
+    ],
+    "fnr_def": "加密后 ASR 未识别出的敏感词比例（论文 Table 7 口径，越高越私密）"
+  },
+  "ori": {
+    "sensitive": 160,
+    "recognized": 149,
+    "fnr": 0.06874999999999998
+  },
+  "enc": {
+    "4": {
+      "sensitive": 160,
+      "recognized": 16,
+      "fnr": 0.9,
+      "wer_overall": 0.2857233348250816,
+      "frame_coverage": 0.2582277510580163
+    },
+    "8": {
+      "sensitive": 160,
+      "recognized": 9,
+      "fnr": 0.94375,
+      "wer_overall": 0.3463007871489389,
+      "frame_coverage": 0.3196156039968244
+    },
+    "12": {
+      "sensitive": 160,
+      "recognized": 12,
+      "fnr": 0.925,
+      "wer_overall": 0.38601594785709487,
+      "frame_coverage": 0.378630673757141
+    },
+    "16": {
+      "sensitive": 160,
+      "recognized": 12,
+      "fnr": 0.925,
+      "wer_overall": 0.411907279452898,
+      "frame_coverage": 0.4323346621153176
+    }
+  },
+  "diagnostics": {
+    "4": [
+      {
+        "w": "THE",
+        "t0": 0.54,
+        "t1": 0.68,
+        "dur": 0.14,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0008.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 3.12,
+        "t1": 3.24,
+        "dur": 0.12,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0032.flac"
+      },
+      {
+        "w": "VOYAGING",
+        "t0": 5.66,
+        "t1": 6.16,
+        "dur": 0.5,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0016.flac"
+      },
+      {
+        "w": "A",
+        "t0": 1.24,
+        "t1": 1.28,
+        "dur": 0.04,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0012.flac"
+      },
+      {
+        "w": "YOU",
+        "t0": 7.14,
+        "t1": 7.26,
+        "dur": 0.12,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0022.flac"
+      },
+      {
+        "w": "AND",
+        "t0": 9.46,
+        "t1": 9.58,
+        "dur": 0.12,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0034.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 15.56,
+        "t1": 15.72,
+        "dur": 0.16,
+        "src": "ner:MISC",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\121\\123859\\121-123859-0001.flac"
+      },
+      {
+        "w": "WIZARD",
+        "t0": 0.48,
+        "t1": 0.78,
+        "dur": 0.3,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac"
+      },
+      {
+        "w": "A",
+        "t0": 8.14,
+        "t1": 8.24,
+        "dur": 0.1,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1320\\122617\\1320-122617-0007.flac"
+      },
+      {
+        "w": "US",
+        "t0": 17.16,
+        "t1": 17.3,
+        "dur": 0.14,
+        "src": "ner:LOC",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1320\\122617\\1320-122617-0007.flac"
+      },
+      {
+        "w": "BE",
+        "t0": 1.76,
+        "t1": 2.4,
+        "dur": 0.64,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1320\\122617\\1320-122617-0032.flac"
+      },
+      {
+        "w": "IN",
+        "t0": 1.8,
+        "t1": 1.9,
+        "dur": 0.1,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1580\\141084\\1580-141084-0009.flac"
+      },
+      {
+        "w": "A",
+        "t0": 1.92,
+        "t1": 1.96,
+        "dur": 0.04,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1580\\141084\\1580-141084-0009.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 0.52,
+        "t1": 0.68,
+        "dur": 0.16,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1580\\141084\\1580-141084-0012.flac"
+      },
+      {
+        "w": "LANE",
+        "t0": 5.0,
+        "t1": 5.34,
+        "dur": 0.34,
+        "src": "pattern:address",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1995\\1826\\1995-1826-0013.flac"
+      },
+      {
+        "w": "US",
+        "t0": 9.44,
+        "t1": 9.6,
+        "dur": 0.16,
+        "src": "ner:LOC",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2094\\142345\\2094-142345-0037.flac"
+      }
+    ],
+    "8": [
+      {
+        "w": "THE",
+        "t0": 3.12,
+        "t1": 3.24,
+        "dur": 0.12,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0032.flac"
+      },
+      {
+        "w": "VOYAGING",
+        "t0": 5.66,
+        "t1": 6.16,
+        "dur": 0.5,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0016.flac"
+      },
+      {
+        "w": "A",
+        "t0": 1.24,
+        "t1": 1.28,
+        "dur": 0.04,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0012.flac"
+      },
+      {
+        "w": "YOU",
+        "t0": 7.14,
+        "t1": 7.26,
+        "dur": 0.12,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0022.flac"
+      },
+      {
+        "w": "AND",
+        "t0": 9.46,
+        "t1": 9.58,
+        "dur": 0.12,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0034.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 15.56,
+        "t1": 15.72,
+        "dur": 0.16,
+        "src": "ner:MISC",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\121\\123859\\121-123859-0001.flac"
+      },
+      {
+        "w": "WIZARD",
+        "t0": 0.48,
+        "t1": 0.78,
+        "dur": 0.3,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac"
+      },
+      {
+        "w": "BE",
+        "t0": 1.76,
+        "t1": 2.4,
+        "dur": 0.64,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1320\\122617\\1320-122617-0032.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 0.52,
+        "t1": 0.68,
+        "dur": 0.16,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1580\\141084\\1580-141084-0012.flac"
+      }
+    ],
+    "12": [
+      {
+        "w": "THE",
+        "t0": 0.54,
+        "t1": 0.68,
+        "dur": 0.14,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0008.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 3.12,
+        "t1": 3.24,
+        "dur": 0.12,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0032.flac"
+      },
+      {
+        "w": "VOYAGING",
+        "t0": 5.66,
+        "t1": 6.16,
+        "dur": 0.5,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0016.flac"
+      },
+      {
+        "w": "A",
+        "t0": 1.24,
+        "t1": 1.28,
+        "dur": 0.04,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0012.flac"
+      },
+      {
+        "w": "YOU",
+        "t0": 7.14,
+        "t1": 7.26,
+        "dur": 0.12,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0022.flac"
+      },
+      {
+        "w": "AND",
+        "t0": 9.46,
+        "t1": 9.58,
+        "dur": 0.12,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0034.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 15.56,
+        "t1": 15.72,
+        "dur": 0.16,
+        "src": "ner:MISC",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\121\\123859\\121-123859-0001.flac"
+      },
+      {
+        "w": "WIZARD",
+        "t0": 0.48,
+        "t1": 0.78,
+        "dur": 0.3,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac"
+      },
+      {
+        "w": "US",
+        "t0": 17.16,
+        "t1": 17.3,
+        "dur": 0.14,
+        "src": "ner:LOC",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1320\\122617\\1320-122617-0007.flac"
+      },
+      {
+        "w": "BE",
+        "t0": 1.76,
+        "t1": 2.4,
+        "dur": 0.64,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1320\\122617\\1320-122617-0032.flac"
+      },
+      {
+        "w": "A",
+        "t0": 1.92,
+        "t1": 1.96,
+        "dur": 0.04,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1580\\141084\\1580-141084-0009.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 0.52,
+        "t1": 0.68,
+        "dur": 0.16,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1580\\141084\\1580-141084-0012.flac"
+      }
+    ],
+    "16": [
+      {
+        "w": "THE",
+        "t0": 0.54,
+        "t1": 0.68,
+        "dur": 0.14,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0008.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 3.12,
+        "t1": 3.24,
+        "dur": 0.12,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0032.flac"
+      },
+      {
+        "w": "VOYAGING",
+        "t0": 5.66,
+        "t1": 6.16,
+        "dur": 0.5,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0016.flac"
+      },
+      {
+        "w": "A",
+        "t0": 1.24,
+        "t1": 1.28,
+        "dur": 0.04,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0012.flac"
+      },
+      {
+        "w": "YOU",
+        "t0": 7.14,
+        "t1": 7.26,
+        "dur": 0.12,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0022.flac"
+      },
+      {
+        "w": "AND",
+        "t0": 9.46,
+        "t1": 9.58,
+        "dur": 0.12,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0034.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 15.56,
+        "t1": 15.72,
+        "dur": 0.16,
+        "src": "ner:MISC",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\121\\123859\\121-123859-0001.flac"
+      },
+      {
+        "w": "WIZARD",
+        "t0": 0.48,
+        "t1": 0.78,
+        "dur": 0.3,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac"
+      },
+      {
+        "w": "US",
+        "t0": 17.16,
+        "t1": 17.3,
+        "dur": 0.14,
+        "src": "ner:LOC",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1320\\122617\\1320-122617-0007.flac"
+      },
+      {
+        "w": "BE",
+        "t0": 1.76,
+        "t1": 2.4,
+        "dur": 0.64,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1320\\122617\\1320-122617-0032.flac"
+      },
+      {
+        "w": "A",
+        "t0": 1.92,
+        "t1": 1.96,
+        "dur": 0.04,
+        "src": "pattern:date",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1580\\141084\\1580-141084-0009.flac"
+      },
+      {
+        "w": "THE",
+        "t0": 0.52,
+        "t1": 0.68,
+        "dur": 0.16,
+        "src": "ner:ORG",
+        "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1580\\141084\\1580-141084-0012.flac"
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+VCTK 2600 句加载完成；protect...
+  protect+attack+recover 293s
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  [vctk_ori] EER=1.59% WER=4.01%
+  [vctk_pro] EER=39.87% WER=10.06%
+  [vctk_att] EER=41.36% WER=26.11%
+  [vctk_rec] EER=3.16% WER=4.81%
+Traceback (most recent call last):
+  File "E:\project\SpeechGuard-Replica\experiments\exp3_main_table.py", line 176, in <module>
+    main()
+  File "E:\project\SpeechGuard-Replica\experiments\exp3_main_table.py", line 119, in main
+    "VCTK": {"eer": {k: v[k] for k, v in
+  File "E:\project\SpeechGuard-Replica\experiments\exp3_main_table.py", line 119, in <dictcomp>
+    "VCTK": {"eer": {k: v[k] for k, v in
+TypeError: 'float' object is not subscriptable

@@ -50,11 +50,11 @@ python -m app.main
 | 里程碑 | 状态 |
 |---|---|
 | M1 环境/数据/仓库 | ✅ 环境就绪+冒烟通过；LibriSpeech/VCTK 就位；华为云 NPU 已验收；剩余：自录集、精读笔记 |
-| M2 声音匿名化核心 | 🚧 核心完成（framing/VAD/warping + 29 测试全绿 + 演示）；待人工试听三个 demo wav |
+| M2 声音匿名化核心 | ✅ 完成（framing/VAD/warping + 29 测试全绿 + 演示音频人工试听通过） |
 | M3 匿名化效果验证 | ✅ **论文 Table 5 成功复现**（single 模式：EER 40.01%/WER 5.44% vs 论文 34.50%/4.80%），证据链见 `docs/M3_reproduction_findings.md` |
-| M4 内容保护 | 🚧 核心模块完成：wav2vec2 转写+CTC词时间戳（免MFA）、BERT NER、GDPR词表/模式、AES-CTR帧加密（±8帧余量）；端到端 FNR 75%（LibriSpeech 6句冒烟），完整评估待自录集 Part C |
-| M5 权限组 + 端到端 | ☐ |
-| M6 前端 + 可视化 | ☐ |
+| M4 内容保护 | ✅ **FNR 复现论文 Table 7**（margin=8：**98.57%** vs 论文 95.88%，60句/142敏感词，Conformer 评估；检测收紧=虚词过滤+date正则收窄，幸存2词均为NER误标普通名词）；全链路完成：CTC词时间戳（免MFA）+检测流水线（词表/模式/NER）+手动标注JSON+AES-CTR帧加密+**MP3适配（公式(5)+静音分发版）**；旧"FNR 75%"根因=插值时间戳失配，已解决；证据链见 `docs/M4_content_protection_findings.md`。自录集 7 人已入库+转写辅助（发音不标准、待人工审听，**不进主评估**） |
+| M5 权限组 + 端到端 | ✅ 完成：CP-ABE 权限组（charm-crypto Windows 编译失败→按计划降级为对称密钥派生属性加密，四算法 API + DNF 访问结构，报告标注与配对 CP-ABE 差异）+ 三组典型权限（admin/collab/public）+ `pipeline.py` 四阶段端到端 CLI + **主表 Table 5/6/7 复现**（LS test-clean + VCTK 全达标）+ 基线对比（Fig.10：SG raw 攻击成功率 14.7% 最低，复现方向）。证据链 `docs/M5_permission_pipeline_findings.md` |
+| M6 前端 + 可视化 | ✅ 完成：Gradio 双角色前端（主人 protect→人工增删→publish MP3 三态+保险库；听众三角色试听/恢复）+ 可视化素材全套（频谱四联图/时间轴/warping曲线/Fig.7/8/10）；**浏览器端到端全流程验证通过**，过程中定位并修复 2 个音频电平 bug。`docs/M6_frontend_findings.md` |
 | M7 华为云部署 + 加分项 | ☐ |
 | M8 报告 + 验收 | ☐ |
 

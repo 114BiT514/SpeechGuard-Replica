@@ -1,0 +1,12 @@
+{
+  "titanet_eer_original": 0.01,
+  "titanet_eer_protected": 0.3866,
+  "ecapa_reference": {
+    "n_utts": 2620,
+    "n_spk": 40,
+    "ecapa_eer_original": 0.0161,
+    "ecapa_eer_protected": 0.4001
+  },
+  "hypothesis2_verdict": "TitaNet \u4fdd\u62a4\u540e EER \u4ecd\u663e\u8457\u4f4e\u4e8e ECAPA \u2192 \u5047\u8bf42\uff08TitaNet \u66f4\u654f\u611f\uff09\u5728\u5168\u96c6\u4e0a\u540c\u6837\u8bc1\u4f2a",
+  "n_utts": 2620
+}

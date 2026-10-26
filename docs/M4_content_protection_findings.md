@@ -53,10 +53,14 @@ v1（未收紧）：160 词、margin=8 FNR=94.38%，12 幸存全是虚词误命�
 `experiments/results/fnr_eval_v1_baseline.json`；v2：142 词、FNR=98.57%。
 转写缓存 `fnr_hyp_cache_v2.json`（v2 密文与 v1 不可混用）。
 
-## 3. 与论文剩余偏差
-- Ori FNR 6.87%（论文 0.6%）：论文 Ori 是"其检测系统标注的真敏感词在干净音频上的漏识别率"，
-  我们的分母含 11 个 CTC 转写本身就不准/Conformer 不认的词（两套 ASR 的差异），
-  属**口径差异**而非保护失效；Enc 94.38% 与论文 95.88% 差 1.5pp 同源于此。
+## 3. 与论文剩余偏差（P1-5 已定量归因）
+- **Ori FNR 8.57% vs 论文 0.6%——口径差，不是缺陷**（`experiments/fnr_ori_analysis.py`）：
+  142 个检测敏感词中 **12 个在干净音频上 Conformer 本来就认不出**（SAVIER/DADALUS/HON 等
+  CTC 误听/罕见专名，双模型词表差），与加密无关。把分母换成"双模型一致认出"的 S*（130 词）：
+  **Ori FNR=0%**（与论文 0.6% 同量级），**真隐藏率 Enc FNR(S*)=98.46%**，与现口径 98.59%
+  一致——结论不随分母定义变化，逐词清单在 `results/fnr_ori_analysis.json`。
+- Enc 98.57% 超论文 95.88%：检测 v2 已剔除虚词误命中，幸存 2 词均为 NER 误标普通名词
+  （WIZARD/LAMP），属"人工标注环节会修正"的 FP，真敏感实体零泄漏。
 - 加密帧覆盖 25–43%（margin 依赖）：论文未公布其覆盖比例；LibriSpeech 语料含
   大量 PER/LOC/ORG 日期类，检测面比论文 GDPR 场景宽。
 
@@ -77,7 +81,22 @@ v1（未收紧）：160 词、margin=8 FNR=94.38%，12 幸存全是虚词误命�
 解码细节：ffmpeg 对含密文帧的 MP3 返回非零码但输出窗外解码样本——评估取
 可解码部分（这正是 M4 §4 的第三方播放器行为，论文简易 decoder 的动机）。
 
-## 4. MP3 适配（任务6）实测行为- `src/content/mp3_crypto.py`：顺序解析帧（跳过 ID3v2/v1 与帧头/CRC），公式(5) 秒→帧号，
+## 3.6 Table 3 模型替换闭环（P1-3，`experiments/table3_error_rates.py`）
+
+经 PDF 列位精确重建，论文 Table 3 是两列：**col1 = NER(BERT) 类型误分类率**
+（5.00/4.68/10.31%）、**col2-4 = SD diarization 误差率 DER**（wav2vec2/HuBERT/WavLM）。
+- 更正旧 README 误引："clean 错误率 5.00% 是 wav2vec2 的"——错，5.00% 属 BERT NER 列。
+- SD 列超出系统范围：我们逐句单说话人处理，无 speaker-transition 可分（且 WavLM 被 gate）。
+- 模型替换论证改用**转写 WER 实测**：wav2vec2-large-960h-lv60-self 在 test-clean 全集
+  **贪心 CTC（无 LM）WER = 11.28%**（beam+LM 官方口径 ~3.4-4.4%；11.28% 是我们时间戳
+  生成端的真实误差上界，也正是 FNR-Ori 口径差的分析对象，见 §3）。
+- 附带"公开语料敏感内容普查"：LS/VCTK 参考文本中 GDPR 信号词按文学词频出现
+  （church/president/月份，每千句 18-69 次）但**真实 PII 为零**——论文内容隐私评测
+  依赖 volunteers 集的原因，也是自录集审听前不进主表的同一逻辑。
+
+## 4. MP3 适配（任务6）实测行为
+
+- `src/content/mp3_crypto.py`：顺序解析帧（跳过 ID3v2/v1 与帧头/CRC），公式(5) 秒→帧号，
   **只加密帧体**（跨帧区间按帧体拼接做 CTR，帧头穿插字节不动）。
 - **quiet 无权限分发版**：加密段帧体清零 → ffmpeg 解码时长保持、窗外逐样本一致、窗内纯静音
   （test 固化）。这是给第三方播放器的正确分发形态。
@@ -91,7 +110,7 @@ v1（未收紧）：160 词、margin=8 FNR=94.38%，12 幸存全是虚词误命�
 - `tests/test_annotation.py` + `tests/test_mp3_crypto.py` + `tests/test_app_handlers.py`
   + MP3 层 FNR（`eval_fnr_mp3.py`），全库 **60/60 通过** ✅（P0 修复后计数）
 - MP3 样例三态（assets/）+ FNR 数字（本文档） ✅
-- DoD 逐条：加密后 ASR 转不出该词 ✓（94.4%）；未加密部分播放无损 ✓（quiet 分发版逐样本一致）；
+- DoD 逐条：加密后 ASR 转不出该词 ✓（WAV 98.57% / MP3 100%）；未加密部分播放无损 ✓（quiet 分发版逐样本一致）；
   凭密钥解回 ✓（逐字节相等）
 - 自录集 7 人已转码入库 + 转写辅助（`data/self_recorded/inventory.md`）：**发音不标准、
   内容未审，不进主评估**，人工审听后再定用途。

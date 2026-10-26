@@ -1,0 +1,42 @@
+wav2vec2 全集转写 2620 句 ...
+W1026 19:52:00.198000 7812 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 25965.79it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-large-960h-lv60-self
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  200/2620 (913s)
+  400/2620 (977s)
+  600/2620 (982s)
+  800/2620 (989s)
+  1000/2620 (996s)
+  1200/2620 (1005s)
+  1400/2620 (1014s)
+  1600/2620 (1026s)
+  1800/2620 (1130s)
+  2000/2620 (1330s)
+  2200/2620 (1555s)
+  2400/2620 (1924s)
+  2600/2620 (2445s)
+  2620/2620 (2565s)
+wav2vec2 test-clean WER = 11.28%（论文 Table 3 语境：BERT NER 5.00%；SD 列为 diarization 不在本系统范围）
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:   2%|▏         | 7/391 [00:00<00:05, 65.33it/s]Loading weights:   6%|▌         | 24/391 [00:00<00:03, 101.93it/s]Loading weights:   9%|▊         | 34/391 [00:00<00:06, 51.96it/s] Loading weights:  13%|█▎        | 52/391 [00:00<00:04, 74.32it/s]Loading weights:  16%|█▌        | 62/391 [00:00<00:05, 64.86it/s]Loading weights:  20%|█▉        | 77/391 [00:01<00:03, 80.78it/s]Loading weights:  22%|██▏       | 87/391 [00:01<00:03, 83.01it/s]Loading weights:  25%|██▌       | 98/391 [00:01<00:03, 88.33it/s]Loading weights:  28%|██▊       | 108/391 [00:01<00:06, 42.12it/s]Loading weights:  36%|███▌      | 140/391 [00:01<00:03, 81.74it/s]Loading weights:  40%|███▉      | 155/391 [00:02<00:03, 75.47it/s]Loading weights:  49%|████▊     | 190/391 [00:02<00:01, 115.67it/s]Loading weights:  53%|█████▎    | 208/391 [00:02<00:02, 89.49it/s] Loading weights: 100%|██████████| 391/391 [00:02<00:00, 147.61it/s]
+[transformers] [1mBertForTokenClassification LOAD REPORT[0m from: dbmdz/bert-large-cased-finetuned-conll03-english
+Key                      | Status     |  | 
+-------------------------+------------+--+-
+bert.pooler.dense.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+NER-clean1: {'gold_items': 8, 'fp': 43, 'fn': 2, 'error_rate': 5.625}
+NER-clean2: {'gold_items': 0, 'fp': 25, 'fn': 0, 'error_rate': 25.0}
+Traceback (most recent call last):
+  File "E:\project\SpeechGuard-Replica\experiments\table3_error_rates.py", line 185, in <module>
+    main()
+  File "E:\project\SpeechGuard-Replica\experiments\table3_error_rates.py", line 158, in main
+    w, _ = sf.read(ls_files[i])
+IndexError: list index out of range

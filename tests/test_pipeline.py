@@ -40,7 +40,10 @@ def _write_short(tmpdir, wav):
 
 def test_pipeline_end_to_end(tmp_path, small_wav, fake_models):
     wav, _ = sf.read(small_wav)
-    bundle = pipeline.protect(np.asarray(wav, np.float32), device="cpu")
+    # 固定 rng：warping 参数随机 → 波形级 corr 在 0.5~0.9 抖动（感知质量由
+    # M3 EER/WER 背书），断言语义是"恢复未崩坏"而非精确复现
+    bundle = pipeline.protect(np.asarray(wav, np.float32), device="cpu",
+                              rng=np.random.default_rng(7))
     texts = [it.text for it in bundle["ann"].items if not it.deleted]
     assert "DIABETIC" in texts and "INSULIN" in texts
     assert len(bundle["spans"]) == len(bundle["keys"]) >= 1
@@ -86,7 +89,8 @@ def test_pipeline_end_to_end(tmp_path, small_wav, fake_models):
 def test_republish_after_manual_edit(tmp_path, small_wav, fake_models):
     """人工删除一个敏感项后重发布：加密对象数量变化、链路仍可恢复。"""
     wav, _ = sf.read(small_wav)
-    bundle = pipeline.protect(np.asarray(wav, np.float32), device="cpu")
+    bundle = pipeline.protect(np.asarray(wav, np.float32), device="cpu",
+                              rng=np.random.default_rng(7))
     bundle["ann"].remove(bundle["ann"].items[0].iid)     # 删第一个自动项
     spans_before = bundle["spans"]
     pipeline.publish(bundle, str(tmp_path))

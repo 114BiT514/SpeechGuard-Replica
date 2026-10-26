@@ -1,0 +1,86 @@
+{
+  "question": "Ori FNR 8.57% vs 论文 0.6% 的口径差",
+  "n_words": 142,
+  "recognized_in_clean_conformer": 130,
+  "not_recognized_in_clean": 12,
+  "ori_fnr_paper_style": 0.0845,
+  "ori_fnr_consistent_denominator": 0.0,
+  "enc_recognized_on_consistent": 2,
+  "enc_fnr_consistent_denominator": 0.9846,
+  "enc_fnr_current_denominator": 0.9859,
+  "leakage_candidates": [
+    {
+      "w": "SAVIER",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0033.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    },
+    {
+      "w": "SAVIER",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0036.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    },
+    {
+      "w": "DADALUS",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0020.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    },
+    {
+      "w": "ALLUVIAN",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1320\\122612\\1320-122612-0015.flac",
+      "src": "ner:MISC",
+      "in_enc": false
+    },
+    {
+      "w": "HON",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1995\\1836\\1995-1836-0000.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    },
+    {
+      "w": "ZARA",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1995\\1836\\1995-1836-0013.flac",
+      "src": "ner:LOC",
+      "in_enc": false
+    },
+    {
+      "w": "OATLEY'S",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2094\\142345\\2094-142345-0022.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    },
+    {
+      "w": "RARE",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2094\\142345\\2094-142345-0023.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    },
+    {
+      "w": "UN",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2094\\142345\\2094-142345-0023.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    },
+    {
+      "w": "IRWIN",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2094\\142345\\2094-142345-0044.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    },
+    {
+      "w": "BERGSON",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\237\\134493\\237-134493-0017.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    },
+    {
+      "w": "AMIEL",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\237\\134500\\237-134500-0025.flac",
+      "src": "ner:ORG",
+      "in_enc": false
+    }
+  ],
+  "conclusion": "S\\A 的词在干净音频上 Conformer 就认不出（CTC 误听词/双模型差异），与加密无关；换成双模型一致分母后 Ori=0%（定义）符合论文 0.6% 量级，真隐藏率以一致分母 Enc FNR 为准"
+}

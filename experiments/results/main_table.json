@@ -138,6 +138,13 @@
       "n_words": 62,
       "mp3_frame_share": 0.2504,
       "layer": "MP3（公式(5) 帧体加密，单变量隔离，WAV 层不加密）"
+    },
+    "ori_caliber_decomposition": {
+      "n_words": 142,
+      "not_recognized_in_clean_conformer": 12,
+      "ori_fnr_consistent_denominator": 0.0,
+      "enc_fnr_consistent_denominator": 0.9846,
+      "conclusion": "Ori 8.5% 全部来自 S\\A（CTC 检测流误听词，双模型口径差，与加密无关）；一致分母下 Enc 真隐藏率 98.46%（P1-5，详见 fnr_ori_analysis.json 含逐词清单）"
     }
   }
 }

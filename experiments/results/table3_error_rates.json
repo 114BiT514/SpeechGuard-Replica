@@ -1,0 +1,52 @@
+{
+  "wav2vec2_wer": {
+    "model": "facebook/wav2vec2-large-960h-lv60-self",
+    "dataset": "LS test-clean (2620 utts)",
+    "decoding": "greedy CTC (no LM)",
+    "wer": 0.1128,
+    "paper_sdclean_context": "论文 Table 3 SD 列为 diarization DER（非本模型此任务）；5.00% 属 BERT NER 列；wav2vec2 官方 beam+LM ~3.4/4.4% WER，贪心无 LM 偏高属正常"
+  },
+  "survey_clean1_LS": {
+    "dataset": "LS test-clean",
+    "n_utts": 2620,
+    "vocab_hits": 84,
+    "pattern_hits": 96,
+    "utts_with_sensitive": 160,
+    "per_1000_utts": 68.7
+  },
+  "survey_clean2_VCTK": {
+    "dataset": "VCTK (3200 utt sample)",
+    "n_utts": 8640,
+    "vocab_hits": 106,
+    "pattern_hits": 56,
+    "utts_with_sensitive": 158,
+    "per_1000_utts": 18.75
+  },
+  "table3_paper": {
+    "columns": "col1=NER(BERT) 类型误分类率(需 gold)；col2-4=SD diarization DER(多人对话)",
+    "NER_BERT": {
+      "Clean1": 5.0,
+      "Clean2": 4.68,
+      "Noisy": 10.31
+    },
+    "SD_DER": {
+      "wav2vec2": [
+        6.09,
+        5.6,
+        16.45
+      ],
+      "HuBERT": [
+        5.93,
+        5.84,
+        15.19
+      ],
+      "WavLM": [
+        4.04,
+        3.48,
+        10.41
+      ]
+    },
+    "reproducibility": "SD 列超出系统范围（逐句单说话人，无 diarization 阶段）且 WavLM 被 HF gate；NER 列需 volunteers 的标注 gold，公开语料不适用（见 survey 列：GDPR/电话/健康类敏感项在 LS/VCTK 每千句命中≈0）。"
+  },
+  "conclusion": "LS/VCTK 中 GDPR 信号词按文学/新闻词频出现（见 survey：每千句数十次，含月份名误配 date 模式），但真实 PII（电话/住址/证件号）为零——朗读语料不携带个人信息；论文 NER/内容隐私列依赖含真实敏感项的 volunteers 集，故其 5.00/4.68/10.31% 无法在公开语料上同口径复现，SD 列（diarization）亦超出逐句单说话人系统范围"
+}

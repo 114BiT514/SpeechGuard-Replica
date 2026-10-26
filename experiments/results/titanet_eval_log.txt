@@ -1,0 +1,71 @@
+OneLogger: Setting error_handling_strategy to DISABLE_QUIETLY_AND_REPORT_METRIC_ERROR for rank (rank=0) with OneLogger disabled. To override: explicitly set error_handling_strategy parameter.
+No exporters were provided. This means that no telemetry data will be collected.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[NeMo W 2026-10-26 22:25:02 warnings:109] E:\Miniconda\envs\nemo_eval\lib\site-packages\huggingface_hub\file_download.py:149: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\33588\.cache\huggingface\hub. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+    To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+      warnings.warn(message)
+    
+[NeMo W 2026-10-26 22:25:15 warnings:109] E:\Miniconda\envs\nemo_eval\lib\site-packages\huggingface_hub\file_download.py:149: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\33588\.cache\huggingface\hub\models--nvidia--speakerverification_en_titanet_large. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+    To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+      warnings.warn(message)
+    
+[NeMo W 2026-10-26 22:25:16 label_models:137] If you intend to do training or fine-tuning, please call the ModelPT.setup_training_data() method and provide a valid configuration file to setup the train data loader.
+    Train config : 
+    manifest_filepath: /manifests/combined_fisher_swbd_voxceleb12_librispeech/train.json
+    sample_rate: 16000
+    labels: null
+    batch_size: 64
+    shuffle: true
+    is_tarred: false
+    tarred_audio_filepaths: null
+    tarred_shard_strategy: scatter
+    augmentor:
+      noise:
+        manifest_path: /manifests/noise/rir_noise_manifest.json
+        prob: 0.5
+        min_snr_db: 0
+        max_snr_db: 15
+      speed:
+        prob: 0.5
+        sr: 16000
+        resample_type: kaiser_fast
+        min_speed_rate: 0.95
+        max_speed_rate: 1.05
+    num_workers: 15
+    pin_memory: true
+    
+[NeMo W 2026-10-26 22:25:16 label_models:137] If you intend to do validation, please call the ModelPT.setup_validation_data() or ModelPT.setup_multiple_validation_data() method and provide a valid configuration file to setup the validation data loader(s). 
+    Validation config : 
+    manifest_filepath: /manifests/combined_fisher_swbd_voxceleb12_librispeech/dev.json
+    sample_rate: 16000
+    labels: null
+    batch_size: 128
+    shuffle: false
+    num_workers: 15
+    pin_memory: true
+    
+[NeMo I 2026-10-26 22:25:17 modelPT:489] Model EncDecSpeakerLabelModel was successfully restored from C:\Users\33588\.cache\huggingface\hub\models--nvidia--speakerverification_en_titanet_large\snapshots\0dc382f40121a5fbd34db10a2bb04d826c2be6a8\speakerverification_en_titanet_large.nemo.
+  [orig] 400/2620 (48s)
+  [orig] 800/2620 (94s)
+  [orig] 1200/2620 (149s)
+  [orig] 1600/2620 (199s)
+  [orig] 2000/2620 (241s)
+  [orig] 2400/2620 (299s)
+  [prot] 400/2620 (53s)
+  [prot] 800/2620 (99s)
+  [prot] 1200/2620 (153s)
+  [prot] 1600/2620 (203s)
+  [prot] 2000/2620 (244s)
+  [prot] 2400/2620 (301s)
+{
+  "titanet_eer_original": 0.01,
+  "titanet_eer_protected": 0.3866,
+  "ecapa_reference": {
+    "n_utts": 2620,
+    "n_spk": 40,
+    "ecapa_eer_original": 0.0161,
+    "ecapa_eer_protected": 0.4001
+  },
+  "hypothesis2_verdict": "TitaNet 保护后 EER 仍显著低于 ECAPA → 假说2（TitaNet 更敏感）在全集上同样证伪",
+  "n_utts": 2620
+}

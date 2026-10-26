@@ -173,6 +173,17 @@ def main(vctk_n_utt=65, wer_n=200):
             "n_words": fm["enc_mp3"]["sensitive"],
             "mp3_frame_share": round(fm["frame_share"], 4),
             "layer": "MP3（公式(5) 帧体加密，单变量隔离，WAV 层不加密）"}
+    ori_path = os.path.join(RES, "fnr_ori_analysis.json")
+    if os.path.exists(ori_path):
+        fa = load("fnr_ori_analysis.json")
+        out["table7_style_fnr"]["ori_caliber_decomposition"] = {
+            "n_words": fa["n_words"],
+            "not_recognized_in_clean_conformer": fa["not_recognized_in_clean"],
+            "ori_fnr_consistent_denominator": fa["ori_fnr_consistent_denominator"],
+            "enc_fnr_consistent_denominator": fa["enc_fnr_consistent_denominator"],
+            "conclusion": "Ori 8.5% 全部来自 S\\A（CTC 检测流误听词，双模型口径差，"
+                          "与加密无关）；一致分母下 Enc 真隐藏率 98.46%"
+                          "（P1-5，详见 fnr_ori_analysis.json 含逐词清单）"}
     json.dump(out, open(os.path.join(RES, "main_table.json"), "w",
                         encoding="utf-8"), indent=2, ensure_ascii=False)
 

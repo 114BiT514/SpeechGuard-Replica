@@ -57,9 +57,9 @@ python -m app.main                  # http://127.0.0.1:7860
 |---|---|
 | M1 环境/数据/仓库 | ✅ 环境就绪+冒烟通过；LibriSpeech/VCTK 就位；华为云 NPU 已验收；精读笔记已交付（`docs/精读笔记_公式表号对照.md`）；剩余：自录集人工审听（7 人已入库+转写辅助） |
 | M2 声音匿名化核心 | ✅ 完成（framing/VAD/warping + 29 测试全绿 + 演示音频人工试听通过） |
-| M3 匿名化效果验证 | ✅ **论文 Table 5 成功复现**（single 模式：EER 40.01%/WER 5.44% vs 论文 34.50%/4.80%），证据链见 `docs/M3_reproduction_findings.md` |
+| M3 匿名化效果验证 | ✅ **论文 Table 5 成功复现**（single 模式：EER 40.01%/WER 5.44% vs 论文 34.50%/4.80%），证据链见 `docs/M3_reproduction_findings.md`；**P1 补全**：Fig.9 五 n 矩阵复现、TitaNet-Large（论文选参 ASV）全集重做 38.66%≈ECAPA 40.01%（修正 24 句子集伪影，§4.1） |
 | M4 内容保护 | ✅ **FNR 复现论文 Table 7**（margin=8：**98.57%** vs 论文 95.88%，60句/142敏感词，Conformer 评估；检测收紧=虚词过滤+date正则收窄，幸存2词均为NER误标普通名词）；全链路完成：CTC词时间戳（免MFA）+检测流水线（词表/模式/NER）+手动标注JSON+AES-CTR帧加密+**MP3适配（公式(5)+静音分发版）**；旧"FNR 75%"根因=插值时间戳失配，已解决；证据链见 `docs/M4_content_protection_findings.md`。自录集 7 人已入库+转写辅助（发音不标准、待人工审听，**不进主评估**） |
-| M5 权限组 + 端到端 | ✅ 完成：CP-ABE 权限组（charm-crypto Windows 编译失败→按计划降级为对称密钥派生属性加密，四算法 API + DNF 访问结构，报告标注与配对 CP-ABE 差异）+ 三组典型权限（admin/collab/public）+ `pipeline.py` 四阶段端到端 CLI + **主表 Table 5/6/7 复现**（LS test-clean + VCTK 全达标）+ 基线对比（Fig.10：SG raw 攻击成功率 14.7% 最低，复现方向）。证据链 `docs/M5_permission_pipeline_findings.md` |
+| M5 权限组 + 端到端 | ✅ 完成：CP-ABE 权限组（charm-crypto Windows 编译失败→按计划降级为对称密钥派生属性加密，四算法 API + DNF 访问结构，报告标注与配对 CP-ABE 差异）+ 三组典型权限（admin/collab/public）+ `pipeline.py` 四阶段端到端 CLI + **主表 Table 5/6/7 复现**（LS test-clean + VCTK 全达标）+ 基线对比四方法齐全+VoiceMask（Fig.10：SG raw 14.7% 最低 < McAdams 40.2 < Overo 49.7 < single 57.3 < VoiceMask† 62.2）。证据链 `docs/M5_permission_pipeline_findings.md` |
 | M6 前端 + 可视化 | ✅ 完成：Gradio 双角色前端（主人 protect→人工增删→publish MP3 三态+保险库；听众三角色试听/恢复）+ 可视化素材全套（频谱四联图/时间轴/warping曲线/Fig.7/8/10）；**浏览器端到端全流程验证通过**，过程中定位并修复 2 个音频电平 bug。`docs/M6_frontend_findings.md` |
 | M7 华为云部署 + 加分项 | ☐ |
 | M8 报告 + 验收 | ☐ |
@@ -70,7 +70,7 @@ python -m app.main                  # http://127.0.0.1:7860
 - **深度学习栈**：torch **2.8.0+cu128** + torchaudio 2.8.0（torchaudio 已停止更新、最高 2.8.0，必须与 torch 版本配对；RTX 4060 驱动 617.42 支持 cu128）。本地 GPU 推理已验证可用。
 - **HuggingFace 访问**：hf-mirror 的 API 现返回 401，改走 Clash 代理直连官方源：
   `export HTTPS_PROXY=http://127.0.0.1:7890 HTTP_PROXY=http://127.0.0.1:7890 HF_HOME=E:/project/SpeechGuard-Replica/data/hf-cache`
-- **模型替换说明（WavLM → wav2vec2）**：论文用 WavLM 做离线转写，但 `facebook/wavlm-large` 在 Hub 已被 gate（401）。改用 `facebook/wav2vec2-large-960h-lv60-self`——论文 Table 3 本身就把 wav2vec2 列为对比的 SD 模型（clean 错误率 5.00% vs WavLM 4.04%），报告中如实注明即可。
+- **模型替换说明（WavLM → wav2vec2）**：论文用 WavLM 做离线转写+日志（SD），但 `facebook/wavlm-large` 在 Hub 已被 gate（401）。改用 `facebook/wav2vec2-large-960h-lv60-self`。注意论文 Table 3 是**两列**：NER 列（BERT）Clean1/2/Noisy=5.00/4.68/10.31%，SD 列（diarization 误差）wav2vec2/HuBERT/WavLM Clean1=6.09/5.93/4.04%——**5.00% 是 BERT 的数字，不是 wav2vec2**（此前本备忘误引，已更正）。我们系统单说话人数据无 speaker-transition 可分，SD 列超出系统范围（书面结论见 `experiments/results/table3_error_rates.json`）；wav2vec2 替换论证改用其**转写 WER 实测**。
 - **已缓存模型**：`data/pretrained/` 内 ECAPA-TDNN（85MB）、Conformer ASR（786MB，SpeechBrain COPY 策略落盘）；`data/hf-cache/` 内 BERT-NER（dbmdz）、wav2vec2-960h。
 - **SpeechBrain on Windows 两个坑**：① 无符号链接特权 → 所有 `from_hparams` 必须传 `local_strategy=LocalStrategy.COPY_SKIP_CACHE`；② 反斜杠路径会被内部处理吃掉 → 传给 speechbrain 的文件路径一律 `replace("\\","/")`。参考 `scripts/smoke_test.py`。
 - **数据集**：LibriSpeech test-clean（2620 条✓）/ dev-clean（2703 条✓）已解压至 `data/librispeech/LibriSpeech/`；VCTK 0.92（silence-trimmed FLAC 版，109 个说话人、88,328 条 flac + `txt/` 转写 + `speaker-info.txt`）解压于 `data/vctk/wav48_silence_trimmed/`（官方源直连仅 ~20KB/s，取自 hf-mirror 镜像 `duanyu027/vctk_0.92`；注意 `wav48_silence_trimmed/` 下的 `log.txt` 和 `s5/` 不是说话人，加载时过滤）。

@@ -60,8 +60,24 @@ v1（未收紧）：160 词、margin=8 FNR=94.38%，12 幸存全是虚词误命�
 - 加密帧覆盖 25–43%（margin 依赖）：论文未公布其覆盖比例；LibriSpeech 语料含
   大量 PER/LOC/ORG 日期类，检测面比论文 GDPR 场景宽。
 
-## 4. MP3 适配（任务6）实测行为
-- `src/content/mp3_crypto.py`：顺序解析帧（跳过 ID3v2/v1 与帧头/CRC），公式(5) 秒→帧号，
+## 3.5 MP3 发布层 FNR（P0-5 补测，`experiments/eval_fnr_mp3.py`）
+
+单变量隔离：**WAV 层不加密敏感词**，只测公式(5) 的 MP3 帧体加密/静音替换。
+25 句 / 62 敏感词（与 eval_fnr 同采样同打分口径），publish 真实链路（128kbps
+44.1k MP3 → 帧体操作 → ffmpeg 容忍坏帧解码 → Conformer beam=4）：
+
+| 态 | FNR（认不出） | 说明 |
+|---|---|---|
+| clean MP3（只编解码，未加密） | 9.68% | 有损格式本身 + 双模型口径的基线（≈WAV 层 Ori 8.57%） |
+| **enc MP3（公式(5) 帧体加密）** | **100.00%** | 62 词无一复原；第三方解码器对密文帧整帧丢弃（连时间前移一起消灭内容） |
+| quiet MP3（静音分发版） | 98.39% | 1 个幸存者（上下文脑补） |
+
+论文 Table 7 Enc=95.88%——MP3 层两种形态均达标。结果并入
+`main_table.json.table7_style_fnr.ours_mp3_layer` 与 `main_table.md`。
+解码细节：ffmpeg 对含密文帧的 MP3 返回非零码但输出窗外解码样本——评估取
+可解码部分（这正是 M4 §4 的第三方播放器行为，论文简易 decoder 的动机）。
+
+## 4. MP3 适配（任务6）实测行为- `src/content/mp3_crypto.py`：顺序解析帧（跳过 ID3v2/v1 与帧头/CRC），公式(5) 秒→帧号，
   **只加密帧体**（跨帧区间按帧体拼接做 CTR，帧头穿插字节不动）。
 - **quiet 无权限分发版**：加密段帧体清零 → ffmpeg 解码时长保持、窗外逐样本一致、窗内纯静音
   （test 固化）。这是给第三方播放器的正确分发形态。
@@ -72,7 +88,8 @@ v1（未收紧）：160 词、margin=8 FNR=94.38%，12 幸存全是虚词误命�
 ## 5. 交付物清单（DoD 对照）
 - `src/content/`：transcribe / align / ner / sensitive_lists / detect / encrypt / mp3_crypto / annotation ✅
 - 手动标注 JSON（annotation.py，增删软删除/改时间/帧区间合并），M6 前端直接消费 ✅
-- `tests/test_annotation.py` + `tests/test_mp3_crypto.py`（+原有），全库 **50/50 通过** ✅
+- `tests/test_annotation.py` + `tests/test_mp3_crypto.py` + `tests/test_app_handlers.py`
+  + MP3 层 FNR（`eval_fnr_mp3.py`），全库 **60/60 通过** ✅（P0 修复后计数）
 - MP3 样例三态（assets/）+ FNR 数字（本文档） ✅
 - DoD 逐条：加密后 ASR 转不出该词 ✓（94.4%）；未加密部分播放无损 ✓（quiet 分发版逐样本一致）；
   凭密钥解回 ✓（逐字节相等）

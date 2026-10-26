@@ -72,7 +72,10 @@ def main(vctk_n_utt=65, wer_n=200):
                 "att": load("m3_complete.json")["testclean_attacked"]["wer"],
                 "rec": load("full_testclean_single_recover.json")["wer_recovered_single"]},
     }
-    rtc = load("m3_complete.json")["rtc"]
+    rtc_pool = load("m3_complete.json")["rtc"]      # 预生成参数池（历史，仅作优化注脚）
+    rtc_same = load("exp4_compare.json")["speechguard"]["rtc"]   # 与基线同一次运行、无池
+    base_rtc = {m: load("exp4_compare.json")[m]["rtc"]
+                for m in ("single", "mcadams", "overo")}
     fnr = load("fnr_eval.json")
 
     # ── VCTK 补数：att WER + recover 两态（整段结果缓存，重跑秒出）──
@@ -146,16 +149,30 @@ def main(vctk_n_utt=65, wer_n=200):
                 "recover": {"eer": 7.07, "wer": 9.90}},
         },
         "table6_style_rtc": {
-            "ours": rtc,
+            "authoritative": {"note": "与基线同一次运行（exp4 part_b）、无预生成参数池",
+                              "SG": rtc_same, **base_rtc},
+            "pooled_optimized": {**rtc_pool,
+                                 "note": "预生成参数池的加速值（历史 M3 运行），只作实现优化注脚"},
             "paper": {"SG": [0.32, 0.26], "VoiceMask": [0.29, 0.34],
                       "McAdams": [0.27, 0.21], "Overo": [0.30, 0.31]}},
         "table7_style_fnr": {
             "ours": {"ori_fnr": round(fnr["ori"]["fnr"], 4),
                      "enc_fnr_margin8": round(fnr["enc"]["8"]["fnr"], 4),
                      "dec_fnr": round(fnr["ori"]["fnr"], 4),
-                     "n_words": fnr["ori"]["sensitive"]},
+                     "n_words": fnr["ori"]["sensitive"],
+                     "layer": "WAV（36ms 帧 AES-CTR）"},
             "paper": {"ori": 0.006, "enc": 0.9588, "dec": 0.006}},
     }
+    mp3_path = os.path.join(RES, "fnr_eval_mp3.json")
+    if os.path.exists(mp3_path):
+        fm = load("fnr_eval_mp3.json")
+        out["table7_style_fnr"]["ours_mp3_layer"] = {
+            "clean_mp3_fnr": fm["clean_mp3"]["fnr"],
+            "enc_mp3_fnr": fm["enc_mp3"]["fnr"],
+            "quiet_mp3_fnr": fm["quiet_mp3"]["fnr"],
+            "n_words": fm["enc_mp3"]["sensitive"],
+            "mp3_frame_share": round(fm["frame_share"], 4),
+            "layer": "MP3（公式(5) 帧体加密，单变量隔离，WAV 层不加密）"}
     json.dump(out, open(os.path.join(RES, "main_table.json"), "w",
                         encoding="utf-8"), indent=2, ensure_ascii=False)
 
@@ -176,9 +193,19 @@ def main(vctk_n_utt=65, wer_n=200):
           f"恢复（EER / WER）：我们 LS {ls['eer']['rec']*100:.2f}% / "
           f"{ls['wer']['rec']*100:.2f}%；我们 VCTK {t['VCTK']['eer']['rec']*100:.2f}% / "
           f"{t['VCTK']['wer']['rec']*100:.2f}%（论文 7.07 / 9.90）",
-          f"RTC：protect {rtc['protect']} / recover {rtc['recover']}（论文 0.32/0.26）",
-          f"FNR：Enc margin=8 → {fnr['enc']['8']['fnr']*100:.2f}%（论文 95.88%）；"
+          f"RTC（Table 6，四方法同一次运行、无预生成池）："
+          f"SG protect {rtc_same['protect']} / recover {rtc_same['recover']}；"
+          f"单参数 {base_rtc['single']['protect']}、McAdams {base_rtc['mcadams']['protect']}、"
+          f"Overo {base_rtc['overo']['protect']}（论文 SG 0.32/0.26，我们约快 5×）。"
+          f"注：预生成参数池可将 SG 进一步优化到 {rtc_pool['protect']}/{rtc_pool['recover']}（历史 M3 值，不用于跨方法对比）",
+          f"FNR（WAV 层）：Enc margin=8 → {fnr['enc']['8']['fnr']*100:.2f}%（论文 95.88%）；"
           f"Dec = Ori（逐字节还原）", ""]
+    if os.path.exists(os.path.join(RES, "fnr_eval_mp3.json")):
+        fm = load("fnr_eval_mp3.json")
+        md.insert(len(md) - 1,
+                  f"FNR（MP3 层，公式(5) 单变量）：enc {fm['enc_mp3']['fnr']*100:.2f}% / "
+                  f"quiet {fm['quiet_mp3']['fnr']*100:.2f}% / clean-mp3 基线 "
+                  f"{fm['clean_mp3']['fnr']*100:.2f}%（{fm['enc_mp3']['sensitive']} 词）")
     open(os.path.join(RES, "main_table.md"), "w", encoding="utf-8").write("\n".join(md))
     print("\n".join(md))
     print("saved main_table.json / main_table.md")

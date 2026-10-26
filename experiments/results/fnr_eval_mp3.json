@@ -1,0 +1,31 @@
+{
+  "protocol": {
+    "n_utts": 25,
+    "asr": "Conformer beam=4（论文协议）",
+    "path": "pipeline.publish 真实路径（128kbps MP3、公式(5) 帧体加密/静音替换）",
+    "note": "enc 版第三方解码整帧丢弃噪声帧（时间前移），quiet 版时长保持——两版敏感词均不可识别；与 WAV 层 eval_fnr 同一采样/打分口径"
+  },
+  "clean_mp3": {
+    "sensitive": 62,
+    "recognized": 56,
+    "fnr": 0.09677419354838712
+  },
+  "enc_mp3": {
+    "sensitive": 62,
+    "recognized": 0,
+    "fnr": 1.0
+  },
+  "quiet_mp3": {
+    "sensitive": 62,
+    "recognized": 1,
+    "fnr": 0.9838709677419355
+  },
+  "frame_share": 0.2503892868265338,
+  "survivors_enc": [],
+  "survivors_quiet": [
+    {
+      "w": "WIZARD",
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac"
+    }
+  ]
+}

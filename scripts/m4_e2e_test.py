@@ -1,4 +1,8 @@
-"""[M4 集成测试] 端到端内容保护验证（LibriSpeech 真实语音，不等自录集）。
+"""[M4 集成测试·遗留] 端到端内容保护验证（LibriSpeech 真实语音，不等自录集）。
+
+⚠️ 本脚本是 M4 冒烟版（参考文本插值对齐 + 仅实体检测），FNR≈75% 为**历史口径**，
+根因与修复见 docs/M4_content_protection_findings.md §2。权威 FNR 评估：
+`experiments/eval_fnr.py`（WAV 层 98.57%）与 `experiments/eval_fnr_mp3.py`（MP3 层）。
 
 流程：参考文本 NER 找实体 → forced_align 词级时间戳 → 实体帧区间 AES-CTR 加密
 → 重新转写算 FNR（论文 §5.1：加密后 ASR 仍识别出的敏感词比例，越低越私密）

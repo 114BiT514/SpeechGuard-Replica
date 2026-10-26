@@ -26,18 +26,24 @@ SpeechGuard-Replica/
 └── assets/           # demo 音频与截图
 ```
 
-## 快速开始（M8 完善）
+## 快速开始
 
 ```bash
-# 1. 环境（见 environment.yml）
+# 1. 环境（见 environment.yml；Windows 本机用 E:/Miniconda/envs/speechguard）
 conda env create -f environment.yml && conda activate speechguard
 
-# 2. 端到端演示（M5 完成后可用）
-python -m src.pipeline demo assets/demo.wav
+# 2. 单元测试
+python -m pytest tests/ -q          # 57 项
 
-# 3. 前端（M6 完成后可用）
-python -m app.main
+# 3. 端到端演示（protect → publish → listen → recover，产物含三态 MP3）
+python -m src.pipeline demo assets/sample_utt.wav
+
+# 4. 前端（Gradio 双角色：音频主人 / 听众；含"载入示例语音"按钮）
+python -m app.main                  # http://127.0.0.1:7860
 ```
+
+> 模型权重需先按"环境备忘"下载缓存（`data/pretrained/`、`data/hf-cache/`）。
+> 指标的唯一权威口径：`experiments/results/main_table.md`（Table 5/6/7 样式）。
 
 ## 模型权重与数据声明（M8 完善）
 
@@ -49,7 +55,7 @@ python -m app.main
 
 | 里程碑 | 状态 |
 |---|---|
-| M1 环境/数据/仓库 | ✅ 环境就绪+冒烟通过；LibriSpeech/VCTK 就位；华为云 NPU 已验收；剩余：自录集、精读笔记 |
+| M1 环境/数据/仓库 | ✅ 环境就绪+冒烟通过；LibriSpeech/VCTK 就位；华为云 NPU 已验收；精读笔记已交付（`docs/精读笔记_公式表号对照.md`）；剩余：自录集人工审听（7 人已入库+转写辅助） |
 | M2 声音匿名化核心 | ✅ 完成（framing/VAD/warping + 29 测试全绿 + 演示音频人工试听通过） |
 | M3 匿名化效果验证 | ✅ **论文 Table 5 成功复现**（single 模式：EER 40.01%/WER 5.44% vs 论文 34.50%/4.80%），证据链见 `docs/M3_reproduction_findings.md` |
 | M4 内容保护 | ✅ **FNR 复现论文 Table 7**（margin=8：**98.57%** vs 论文 95.88%，60句/142敏感词，Conformer 评估；检测收紧=虚词过滤+date正则收窄，幸存2词均为NER误标普通名词）；全链路完成：CTC词时间戳（免MFA）+检测流水线（词表/模式/NER）+手动标注JSON+AES-CTR帧加密+**MP3适配（公式(5)+静音分发版）**；旧"FNR 75%"根因=插值时间戳失配，已解决；证据链见 `docs/M4_content_protection_findings.md`。自录集 7 人已入库+转写辅助（发音不标准、待人工审听，**不进主评估**） |

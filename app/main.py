@@ -99,8 +99,10 @@ def protect_detect(audio, level_name):
 # ───────────────────────── 主人：人工增删 ─────────────────────────
 
 def add_words(bundle, start_sel, end_sel):
-    if bundle is None or not start_sel:
-        raise gr.Error("先执行保护+检测")
+    if bundle is None:
+        raise gr.Error("请先在①执行保护+检测")
+    if not start_sel:
+        raise gr.Error("请先在左侧下拉中选择一个起始词（下拉无选项说明转写为空）")
     i0 = int(start_sel.split(":")[0])
     i1 = int(end_sel.split(":")[0]) if end_sel else i0
     if i1 < i0:
@@ -114,8 +116,10 @@ def add_words(bundle, start_sel, end_sel):
 
 
 def remove_item(bundle, sel):
-    if bundle is None or not sel:
-        raise gr.Error("先执行保护+检测并选择要删除的项")
+    if bundle is None:
+        raise gr.Error("请先在①执行保护+检测")
+    if not sel:
+        raise gr.Error("请先在「删除敏感项」下拉中选择要删除的项")
     iid = sel.split(":")[0].strip()
     bundle["ann"].remove(iid)
     bundle["wav"] = _reencrypt(bundle)

@@ -75,9 +75,29 @@
     }
   },
   "table6_style_rtc": {
-    "ours": {
+    "authoritative": {
+      "note": "与基线同一次运行（exp4 part_b）、无预生成参数池",
+      "SG": {
+        "protect": 0.0634,
+        "recover": 0.06
+      },
+      "single": {
+        "protect": 0.0463,
+        "recover": 0.046
+      },
+      "mcadams": {
+        "protect": 0.0504,
+        "recover": 0.0512
+      },
+      "overo": {
+        "protect": 0.0515,
+        "recover": 0.0505
+      }
+    },
+    "pooled_optimized": {
       "protect": 0.0081,
-      "recover": 0.0075
+      "recover": 0.0075,
+      "note": "预生成参数池的加速值（历史 M3 运行），只作实现优化注脚"
     },
     "paper": {
       "SG": [
@@ -103,12 +123,21 @@
       "ori_fnr": 0.0857,
       "enc_fnr_margin8": 0.9857,
       "dec_fnr": 0.0857,
-      "n_words": 140
+      "n_words": 140,
+      "layer": "WAV（36ms 帧 AES-CTR）"
     },
     "paper": {
       "ori": 0.006,
       "enc": 0.9588,
       "dec": 0.006
+    },
+    "ours_mp3_layer": {
+      "clean_mp3_fnr": 0.09677419354838712,
+      "enc_mp3_fnr": 1.0,
+      "quiet_mp3_fnr": 0.9838709677419355,
+      "n_words": 62,
+      "mp3_frame_share": 0.2504,
+      "layer": "MP3（公式(5) 帧体加密，单变量隔离，WAV 层不加密）"
     }
   }
 }

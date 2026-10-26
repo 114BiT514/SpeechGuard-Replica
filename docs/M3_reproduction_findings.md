@@ -1,5 +1,10 @@
 # M3 复现结论：论文数据成功复现（single 模式），完整证据链
 
+> ⚠️ **口径注记（P0-1/P0-2 审查修复）**：本表 VCTK 数字（39.44/11.30/41.75）与
+> RTC（0.008/0.007）为 **M3 历史运行**（全局 rng 流、预生成参数池），保留为证据链；
+> 论文对照表与验收引用一律以 **`experiments/results/main_table.md`** 为准
+> （逐句种子、三态齐全；RTC 无池保守值与基线同源，见 main_table.json `table6_style_rtc`）。
+
 > 实验条件：完整 LibriSpeech **test-clean（40 说话人 / 2620 句）**，
 > n∈[1,10] 随机、dist∈(0.5,0.6)（论文原型 §5.1 设置），ECAPA-TDNN 全对配对协议，
 > Conformer ASR（beam=4，WER 在 300 句随机子集上测）。

@@ -85,7 +85,9 @@ def protect(wav16k: np.ndarray, device: str = "cuda:0",
     gain = 0.98 / pk if pk > 0.98 else 1.0
     prot = prot * gain
     prot_pcm = _to_pcm(prot)
-    ctc = transcribe_with_times(_to_float(prot_pcm), device=device)
+    # 检测在【原始音频】上做（论文 §4.3：SD 转写录音原始音频；与 eval_fnr 评估
+    # 协议一致）。36ms 帧网格 warping 前后对齐，CTC 时间戳可直接用于保护态加密。
+    ctc = transcribe_with_times(wav.astype(np.float32), device=device)
     hits = detect_sensitive(ctc, device=device)
     ann = Annotation.from_ctc("in-memory", ctc)
     by_idx = {h.idx: h for h in hits}

@@ -29,6 +29,27 @@
   2. warping OLA 输出超 [-1,1] → int16 量化饱和方波 → protect 端按峰值 0.98
      归一并记录 gain、recover 端还原（tests/test_pipeline.py 固化接线）。
 
+### 2.1 P0-4 补充记录（2026-10-26 审查修复）：人工增删链路验证
+
+真实鼠标指针事件在本机 IAB 会话无法送达（`playwright.click()` 与坐标级 `cua.click`
+均超时/未达，属受控浏览器环境限制而非应用缺陷——面板可见性已开、元素命中测试
+elementFromPoint 正常）。因此改用**与浏览器完全相同的 gradio 队列协议**
+（gradio_client，同 session 保持 gr.State）走通全链路，并新增
+`tests/test_app_handlers.py` 直达 handler 断言：
+
+| 步骤 | 结果 |
+|---|---|
+| ① 保护（真实音频+模型，非替身） | 检出 POLITICS(vocab:politics)+RELIGION(vocab:religion)，1 个相邻合并项 |
+| ② 增补 "3: DISPUTE" | 表格变 2 项，含 manual 行 ✓ |
+| ② 删除 "w3-3/w1-1: DISPUTE" | 状态列="已删除"（软删除留痕），有效项回 1 ✓ |
+| ③ 发布 | 敏感项/加密对象计数随删除联动 ✓ |
+| 恢复 | 管理员=解密+逆扭曲；合作者=仅逆扭曲；公开=试听静音版 ✓ |
+| 报错文案 | 空选/无 bundle 分支已区分（"请先在①执行保护+检测" vs "请先…选择起始词"），单测覆盖 ✓ |
+
+同时修复了验证过程中暴露的真实 bug：gradio Dropdown 可选输入（结束词）未选时必须传
+`null`，前端空字符串会被 gradio 校验层拒绝——UI 上无影响（前端自己发 null），但
+说明"下拉值未提交"类问题此前确实在协议层存在，现在链路两端都验证过。
+
 ## 3. 可视化素材（报告直接可用）
 
 | 文件 | 内容 |

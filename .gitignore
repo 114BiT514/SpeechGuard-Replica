@@ -33,3 +33,7 @@ experiments/results/tmp/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# 大体积可再生缓存（不进 git）
+*.npz
+experiments/results/vctk_full_wer_cache.npz

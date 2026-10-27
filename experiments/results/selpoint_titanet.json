@@ -1,0 +1,21 @@
+{
+  "protocol": "同 selpoint_ecapa（dev-clean 25×40, n=1, dist(0.5,0.6), single）",
+  "titanet_eer_original": 0.0159,
+  "titanet_eer_protected": 0.3791,
+  "titanet_far_frr_at_eer": 0.7583,
+  "paper_asv_err_rate": 0.8018,
+  "verdict": "TitaNet FAR+FRR=75.83% vs 论文 80.18% → 偏差 4.4%（single 模式与论文逐段模式差异，结合 2×EER 口径推断见 selpoint_ecapa.json）",
+  "ecapa_reference": {
+    "protocol": "dev-clean 25×40, single 模式, n=1, dist∈(0.5,0.6), ECAPA 全集协议",
+    "ecapa_eer_original": 0.0176,
+    "ecapa_eer_protected": 0.4026,
+    "paper": {
+      "eer_0_6": 0.4009,
+      "asv_err_rate": 0.8018,
+      "identity_check_2xEER": true,
+      "asr_err_rate": 0.0358,
+      "note": "论文 ASV'错误率'=FAR+FRR@EER 交叉点=2×EER（40.09×2=80.18，与论文自身 Table 2 数字精确自洽）；ASR 3.58% 用 SpeechBrain Transformer，我们 fig7_single 同档 Conformer WER=4.88%（模型口径差）"
+    },
+    "ours_far_frr_ecapa": 0.8051
+  }
+}

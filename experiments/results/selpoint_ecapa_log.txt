@@ -1,0 +1,19 @@
+dev-clean 工作点集：994 句 / 25 人（n=1, dist(0.5,0.6)）
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+{
+  "protocol": "dev-clean 25×40, single 模式, n=1, dist∈(0.5,0.6), ECAPA 全集协议",
+  "ecapa_eer_original": 0.0176,
+  "ecapa_eer_protected": 0.4026,
+  "paper": {
+    "eer_0_6": 0.4009,
+    "asv_err_rate": 0.8018,
+    "identity_check_2xEER": true,
+    "asr_err_rate": 0.0358,
+    "note": "论文 ASV'错误率'=FAR+FRR@EER 交叉点=2×EER（40.09×2=80.18，与论文自身 Table 2 数字精确自洽）；ASR 3.58% 用 SpeechBrain Transformer，我们 fig7_single 同档 Conformer WER=4.88%（模型口径差）"
+  },
+  "ours_far_frr_ecapa": 0.8051
+}
+SELPOINT_EXIT=0

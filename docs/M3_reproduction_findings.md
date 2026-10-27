@@ -92,7 +92,6 @@ single 模式命中论文工作点，已设为 `protect/recover` 默认。
 | TitaNet EER 0.0% | 证伪假说2 | ~~同上~~ **全集已重做（P1-4，2026-10-26）**：见 §4.1 |
 
 ## 4.1 TitaNet 全集重做（P1-4 闭环，`scripts/titanet_full_gen.py`+`titanet_full_eval.py`）
-
 同一 2620 句 single 模式保护素材（dist∈(0.5,0.6)、n∈[1,10]）、全对配对协议：
 
 | ASV | 原始 EER | 保护后 EER |
@@ -105,6 +104,22 @@ single 模式命中论文工作点，已设为 `protect/recover` 默认。
 规模下都被证伪**，且新证据更强：我们的 single 模式保护对论文原版 ASV 模型 TitaNet
 同样产生 ~39% 的匿名化（论文用 TitaNet 选参报 80.18% 错误率——换算口径不同但同为
 "陡升"方向）。本节同时是 M3 教训 §2（EER 规模敏感性）的自我验证案例。
+
+## 4.2 B 类差距补测（2026-10-26 晚，B5/B6）
+
+- **B5 · VCTK 全集化**：主表 VCTK 行已从 40×65 子集升级为 **108 人 / 8100 句**
+  （论文 Table 4 口径 109/8163，1 人镜像缺 txt）——`exp7_vctk_full.py`，
+  逐说话人流式 + 全对配对 + Conformer beam=4 WER 200 句。三态：pro EER 39.27% /
+  att 41.40% / WER 10.09%→24.31%（论文 35.66→37.22 / 14.81→32.69）——EER 同型偏高、
+  WER 全线更优（single 模式保真），与 LS 结论一致。修复过程中抓到一个评估 bug：
+  WER 参考与选中假设错序（首跑四态 WER 均 3.2% 即其症状），已修+对齐缓存落盘。
+- **B6 · 选参工作点 80.18% 命中**：推断论文"ASV 错误率 80.18%"=EER 交叉点处
+  FAR+FRR=2×EER（论文自身 40.09×2=80.18 精确自洽，identity 校验已固化在
+  `selpoint_ecapa.json`）。dev-clean 25人×40句、n=1、dist∈(0.5,0.6)、single：
+  **ECAPA FAR+FRR=80.51%（vs 论文 80.18%，+0.33pp 命中）**；TitaNet-Large
+  （论文选参模型）75.83%（-4.35pp，single 与逐段模式差异）。ASR 侧 3.58% 的模型
+  口径差（SpeechBrain Transformer vs 我们 Conformer 4.88%）维持书面说明。
+  脚本：`scripts/selpoint_gen.py` + `scripts/titanet_selpoint.py`。
 
 ## 5. 对论文方法理解的最终表述
 

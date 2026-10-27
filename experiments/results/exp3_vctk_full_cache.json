@@ -1,0 +1,28 @@
+{
+  "ori": {
+    "eer": 0.0122,
+    "wer": 0.0353,
+    "n_wer": 200
+  },
+  "pro": {
+    "eer": 0.3927,
+    "wer": 0.1009,
+    "n_wer": 200
+  },
+  "att": {
+    "eer": 0.414,
+    "wer": 0.2431,
+    "n_wer": 200
+  },
+  "rec": {
+    "eer": 0.0258,
+    "wer": 0.0474,
+    "n_wer": 200
+  },
+  "_meta": {
+    "n_spk": 108,
+    "n_utts": 8100,
+    "protocol": "single/dist(0.5,0.6)/n~U[1,10]/ECAPA 1000imp/Conformer beam4 WER_200",
+    "paper_table4": "109 spk / 8163 utts / 44.0h"
+  }
+}

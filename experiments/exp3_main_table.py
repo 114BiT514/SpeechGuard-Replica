@@ -79,9 +79,18 @@ def main(vctk_n_utt=65, wer_n=200):
     fnr = load("fnr_eval.json")
 
     # ── VCTK 补数：att WER + recover 两态（整段结果缓存，重跑秒出）──
-    if os.path.exists(VCTK_CACHE):
+    # 优先级：全集缓存（B5，109人×75）> 子集缓存（40人×65）> 现算
+    FULL_CACHE = os.path.join(RES, "exp3_vctk_full_cache.json")
+    if os.path.exists(FULL_CACHE):
+        vres = load("exp3_vctk_full_cache.json")
+        vctk_scale = vres.pop("_meta", {"n_spk": "?", "n_utts": "?"})
+        vctk_scale["level"] = "FULL"
+        print(f"VCTK 用【全集】缓存 {vctk_scale.get('n_spk')}人/"
+              f"{vctk_scale.get('n_utts')}句（论文 109/8163）", flush=True)
+    elif os.path.exists(VCTK_CACHE):
         vres = load("exp3_vctk_cache.json")
-        print("VCTK 命中缓存，跳过 GPU 评估", flush=True)
+        vctk_scale = {"n_spk": 40, "n_utts": 2600, "level": "SUBSET"}
+        print("VCTK 命中子集缓存（B5 完成前）", flush=True)
     else:
         asv = load_asv("cuda:0")
         asr = load_asr(device="cuda:0", overrides="test_beam_size: 4")
@@ -130,10 +139,12 @@ def main(vctk_n_utt=65, wer_n=200):
         vres = {"ori": eval_c("vctk_ori", vwav), "pro": eval_c("vctk_pro", vprot),
                 "att": eval_c("vctk_att", vatt), "rec": eval_c("vctk_rec", vrec)}
         json.dump(vres, open(VCTK_CACHE, "w", encoding="utf-8"), indent=2)
+        vctk_scale = {"n_spk": len(set(vspk)), "n_utts": len(vwav), "level": "SUBSET"}
 
     keys = ("ori", "pro", "att", "rec")
     vctk = {"eer": {k: vres[k]["eer"] for k in keys},
-            "wer": {k: vres[k]["wer"] for k in keys}}
+            "wer": {k: vres[k]["wer"] for k in keys},
+            "scale": vctk_scale}
 
     out = {
         "table5_style": {
@@ -184,6 +195,27 @@ def main(vctk_n_utt=65, wer_n=200):
             "conclusion": "Ori 8.5% 全部来自 S\\A（CTC 检测流误听词，双模型口径差，"
                           "与加密无关）；一致分母下 Enc 真隐藏率 98.46%"
                           "（P1-5，详见 fnr_ori_analysis.json 含逐词清单）"}
+    # B6：论文选参工作点 "ASV 错误率 80.18%" 复现（口径推断 + ECAPA/TitaNet 实测）
+    sp_e = os.path.join(RES, "selpoint_ecapa.json")
+    sp_t = os.path.join(RES, "selpoint_titanet.json")
+    if os.path.exists(sp_e):
+        se = load("selpoint_ecapa.json")
+        st = load("selpoint_titanet.json") if os.path.exists(sp_t) else None
+        out["selection_point_B6"] = {
+            "claim": "论文 §4.2/Table2 工作点 'ASV 错误率 80.18%' = FAR+FRR@EER "
+                     "交叉点 = 2×EER；由论文自身 40.09%×2=80.18% 精确自洽（identity 校验通过）",
+            "protocol": "dev-clean 25人×40句(n=994)、n=1、dist∈(0.5,0.6)、single 模式、全对配对",
+            "paper_eer": se["paper"]["eer_0_6"], "paper_asv_err": se["paper"]["asv_err_rate"],
+            "identity_2xEER_holds": se["paper"]["identity_check_2xEER"],
+            "ecapa": {"eer_protected": se["ecapa_eer_protected"],
+                      "far_frr_2xEER": se["ours_far_frr_ecapa"],
+                      "vs_paper_pp": round((se["ours_far_frr_ecapa"] - 0.8018) * 100, 2)},
+            "titanet": ({"eer_protected": st["titanet_eer_protected"],
+                         "far_frr_2xEER": st["titanet_far_frr_at_eer"],
+                         "vs_paper_pp": round((st["titanet_far_frr_at_eer"] - 0.8018) * 100, 2),
+                         "note": "论文选参用的即 TitaNet-Large"} if st else None),
+            "asr_side": "ASR 3.58% 用 SpeechBrain Transformer；我们 fig7 同档 Conformer "
+                        "WER=4.88%（模型口径差，见 selpoint_ecapa.json）"}
     json.dump(out, open(os.path.join(RES, "main_table.json"), "w",
                         encoding="utf-8"), indent=2, ensure_ascii=False)
 
@@ -197,7 +229,9 @@ def main(vctk_n_utt=65, wer_n=200):
           "| 数据集 | EER-Ori | EER-Pro | EER-Att | WER-Ori | WER-Pro | WER-Att |",
           "|---|---|---|---|---|---|---|",
           row("LS test-clean（我们）", t["LS_test_clean"]),
-          row("VCTK（我们）", t["VCTK"]),
+          row(f"VCTK（我们，{t['VCTK']['scale']['n_spk']}人/"
+              f"{t['VCTK']['scale']['n_utts']}句·{t['VCTK']['scale']['level']}）",
+              t["VCTK"]),
           "| LS test-clean（论文） | 1.47 | 34.50 | 36.77 | 2.46 | 4.80 | 18.39 |",
           "| VCTK（论文） | 1.46 | 35.66 | 37.22 | 6.58 | 14.81 | 32.69 |",
           "",
@@ -217,6 +251,15 @@ def main(vctk_n_utt=65, wer_n=200):
                   f"FNR（MP3 层，公式(5) 单变量）：enc {fm['enc_mp3']['fnr']*100:.2f}% / "
                   f"quiet {fm['quiet_mp3']['fnr']*100:.2f}% / clean-mp3 基线 "
                   f"{fm['clean_mp3']['fnr']*100:.2f}%（{fm['enc_mp3']['sensitive']} 词）")
+    if "selection_point_B6" in out:
+        b6 = out["selection_point_B6"]
+        line = (f"选参工作点（B6）：'ASV错误率'=FAR+FRR@EER=2×EER（论文 2×40.09=80.18 "
+                f"自洽）；我们 ECAPA {b6['ecapa']['far_frr_2xEER']*100:.2f}%"
+                f"（{b6['ecapa']['vs_paper_pp']:+.2f}pp）")
+        if b6.get("titanet"):
+            line += (f"、TitaNet {b6['titanet']['far_frr_2xEER']*100:.2f}%"
+                     f"（{b6['titanet']['vs_paper_pp']:+.2f}pp，single 模式差异）")
+        md.insert(len(md) - 1, line)
     open(os.path.join(RES, "main_table.md"), "w", encoding="utf-8").write("\n".join(md))
     print("\n".join(md))
     print("saved main_table.json / main_table.md")

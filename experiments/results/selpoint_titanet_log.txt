@@ -1,0 +1,55 @@
+OneLogger: Setting error_handling_strategy to DISABLE_QUIETLY_AND_REPORT_METRIC_ERROR for rank (rank=0) with OneLogger disabled. To override: explicitly set error_handling_strategy parameter.
+No exporters were provided. This means that no telemetry data will be collected.
+[NeMo W 2026-10-27 00:11:02 label_models:137] If you intend to do training or fine-tuning, please call the ModelPT.setup_training_data() method and provide a valid configuration file to setup the train data loader.
+    Train config : 
+    manifest_filepath: /manifests/combined_fisher_swbd_voxceleb12_librispeech/train.json
+    sample_rate: 16000
+    labels: null
+    batch_size: 64
+    shuffle: true
+    is_tarred: false
+    tarred_audio_filepaths: null
+    tarred_shard_strategy: scatter
+    augmentor:
+      noise:
+        manifest_path: /manifests/noise/rir_noise_manifest.json
+        prob: 0.5
+        min_snr_db: 0
+        max_snr_db: 15
+      speed:
+        prob: 0.5
+        sr: 16000
+        resample_type: kaiser_fast
+        min_speed_rate: 0.95
+        max_speed_rate: 1.05
+    num_workers: 15
+    pin_memory: true
+    
+[NeMo W 2026-10-27 00:11:02 label_models:137] If you intend to do validation, please call the ModelPT.setup_validation_data() or ModelPT.setup_multiple_validation_data() method and provide a valid configuration file to setup the validation data loader(s). 
+    Validation config : 
+    manifest_filepath: /manifests/combined_fisher_swbd_voxceleb12_librispeech/dev.json
+    sample_rate: 16000
+    labels: null
+    batch_size: 128
+    shuffle: false
+    num_workers: 15
+    pin_memory: true
+    
+[NeMo I 2026-10-27 00:11:02 modelPT:489] Model EncDecSpeakerLabelModel was successfully restored from C:\Users\33588\.cache\huggingface\hub\models--nvidia--speakerverification_en_titanet_large\snapshots\0dc382f40121a5fbd34db10a2bb04d826c2be6a8\speakerverification_en_titanet_large.nemo.
+  [orig] 200/994
+  [orig] 400/994
+  [orig] 600/994
+  [orig] 800/994
+  [prot] 200/994
+  [prot] 400/994
+  [prot] 600/994
+  [prot] 800/994
+{
+  "protocol": "同 selpoint_ecapa（dev-clean 25×40, n=1, dist(0.5,0.6), single）",
+  "titanet_eer_original": 0.0159,
+  "titanet_eer_protected": 0.3791,
+  "titanet_far_frr_at_eer": 0.7583,
+  "paper_asv_err_rate": 0.8018,
+  "verdict": "TitaNet FAR+FRR=75.83% vs 论文 80.18% → 偏差 4.4%（single 模式与论文逐段模式差异，结合 2×EER 口径推断见 selpoint_ecapa.json）"
+}
+TITANET_EXIT=0

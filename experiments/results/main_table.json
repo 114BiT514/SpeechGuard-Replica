@@ -16,16 +16,23 @@
     },
     "VCTK": {
       "eer": {
-        "ori": 0.0159,
-        "pro": 0.3987,
-        "att": 0.4136,
-        "rec": 0.0316
+        "ori": 0.0122,
+        "pro": 0.3927,
+        "att": 0.414,
+        "rec": 0.0258
       },
       "wer": {
-        "ori": 0.0401,
-        "pro": 0.1006,
-        "att": 0.2611,
-        "rec": 0.0481
+        "ori": 0.0353,
+        "pro": 0.1009,
+        "att": 0.2431,
+        "rec": 0.0474
+      },
+      "scale": {
+        "n_spk": 108,
+        "n_utts": 8100,
+        "protocol": "single/dist(0.5,0.6)/n~U[1,10]/ECAPA 1000imp/Conformer beam4 WER_200",
+        "paper_table4": "109 spk / 8163 utts / 44.0h",
+        "level": "FULL"
       }
     },
     "Volunteers": {
@@ -146,5 +153,24 @@
       "enc_fnr_consistent_denominator": 0.9846,
       "conclusion": "Ori 8.5% 全部来自 S\\A（CTC 检测流误听词，双模型口径差，与加密无关）；一致分母下 Enc 真隐藏率 98.46%（P1-5，详见 fnr_ori_analysis.json 含逐词清单）"
     }
+  },
+  "selection_point_B6": {
+    "claim": "论文 §4.2/Table2 工作点 'ASV 错误率 80.18%' = FAR+FRR@EER 交叉点 = 2×EER；由论文自身 40.09%×2=80.18% 精确自洽（identity 校验通过）",
+    "protocol": "dev-clean 25人×40句(n=994)、n=1、dist∈(0.5,0.6)、single 模式、全对配对",
+    "paper_eer": 0.4009,
+    "paper_asv_err": 0.8018,
+    "identity_2xEER_holds": true,
+    "ecapa": {
+      "eer_protected": 0.4026,
+      "far_frr_2xEER": 0.8051,
+      "vs_paper_pp": 0.33
+    },
+    "titanet": {
+      "eer_protected": 0.3791,
+      "far_frr_2xEER": 0.7583,
+      "vs_paper_pp": -4.35,
+      "note": "论文选参用的即 TitaNet-Large"
+    },
+    "asr_side": "ASR 3.58% 用 SpeechBrain Transformer；我们 fig7 同档 Conformer WER=4.88%（模型口径差，见 selpoint_ecapa.json）"
   }
 }

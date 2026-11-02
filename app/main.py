@@ -20,12 +20,13 @@ import numpy as np
 import soundfile as sf
 
 from src import pipeline
+from src.device import device_report, pick_device
 from src.viz import sensitive_timeline, spectrogram_row
 
 DIST_LEVELS = {"轻度 (0.3–0.4)": (0.3, 0.4),
                "标准 (0.5–0.6)": (0.5, 0.6),
                "强 (0.7–0.8)": (0.7, 0.8)}
-DEVICE = os.environ.get("SG_DEVICE", "cuda:0")
+DEVICE = os.environ.get("SG_DEVICE") or pick_device()
 WORKDIR = os.environ.get("SG_WORKDIR",
                          os.path.join(os.path.dirname(os.path.dirname(
                              os.path.abspath(__file__))), "data", "probe", "app"))
@@ -260,15 +261,17 @@ def build_ui():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--device", default=None)
+    ap.add_argument("--device", default=None, help="npu:0 / cuda:0 / cpu；默认自动")
+    ap.add_argument("--host", default="127.0.0.1", help="监听地址，公网部署用 0.0.0.0")
     ap.add_argument("--port", type=int, default=7860)
-    ap.add_argument("--share", action="store_true")
+    ap.add_argument("--share", action="store_true", help="生成 gradio.live 公网链接")
     args = ap.parse_args()
     if args.device:
         globals()["DEVICE"] = args.device
+    print("[device]", device_report(), flush=True)
     demo = build_ui()
-    demo.queue().launch(server_name="127.0.0.1", server_port=args.port,
-                        share=False, inbrowser=False)
+    demo.queue().launch(server_name=args.host, server_port=args.port,
+                        share=args.share, inbrowser=False)
 
 
 if __name__ == "__main__":

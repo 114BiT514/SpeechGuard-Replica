@@ -3,6 +3,7 @@
 需要 ffmpeg（环境内已装）。测试合成一段 3s 音频：0-0.5s 正弦（前段）、
 0.5-1.2s 高频音（"敏感词"段）、1.2-3s 正弦（尾段）。
 """
+import os
 import shutil
 import subprocess
 
@@ -15,8 +16,13 @@ from src.content.encrypt import gen_key
 
 SR_MP3 = 44100
 
-FFMPEG = (shutil.which("ffmpeg")
-          or r"E:/Miniconda/envs/speechguard/Library/bin/ffmpeg.exe")
+
+def _ffmpeg() -> str:
+    from src.ffmpeg_util import find_ffmpeg
+    return find_ffmpeg()
+
+
+FFMPEG = _ffmpeg()
 
 
 def _decode(data: bytes, tmp_path) -> np.ndarray:

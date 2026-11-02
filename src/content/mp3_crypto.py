@@ -21,6 +21,7 @@
 """
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 from dataclasses import dataclass
@@ -177,8 +178,8 @@ def quiet_mp3(data: bytes, ranges: list[tuple[int, int]]) -> bytes:
 def encode_mp3(wav_path: str, out_path: str, kbps: int = 128, sr: int = 44100,
                ffmpeg: str | None = None) -> str:
     """16k 单声道 WAV → MP3（publish 阶段用）。"""
-    ff = ffmpeg or shutil.which("ffmpeg") or \
-        r"E:/Miniconda/envs/speechguard/Library/bin/ffmpeg.exe"
+    from src.ffmpeg_util import find_ffmpeg
+    ff = ffmpeg or find_ffmpeg()
     subprocess.run([ff, "-y", "-v", "error", "-i", wav_path,
                     "-ar", str(sr), "-ac", "1", "-b:a", f"{kbps}k", out_path],
                    check=True)

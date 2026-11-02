@@ -38,13 +38,14 @@ from src.content.detect import detect_sensitive
 from src.content.encrypt import FRAME_LEN, decrypt_spans, encrypt_spans, gen_key
 from src.content.mp3_crypto import (encode_mp3, encrypt_mp3, parse, quiet_mp3,
                                     time_spans_to_frames)
+from src.device import pick_device
 
 SR = 16000
 
 
 def _ffmpeg() -> str:
-    return (shutil.which("ffmpeg")
-            or r"E:/Miniconda/envs/speechguard/Library/bin/ffmpeg.exe")
+    from src.ffmpeg_util import find_ffmpeg
+    return find_ffmpeg()
 
 
 def _to_pcm(wav) -> np.ndarray:
@@ -71,11 +72,12 @@ def _consecutive_groups(idxs):
 
 # ────────────────────────────── 阶段1 protect ──────────────────────────────
 
-def protect(wav16k: np.ndarray, device: str = "cuda:0",
+def protect(wav16k: np.ndarray, device: str | None = None,
            rng: np.random.Generator | None = None,
            dist_range: tuple[float, float] | None = None) -> dict:
     from src.content.transcribe import transcribe_with_times
 
+    device = pick_device(device)
     t0 = time.time()
     wav = np.asarray(wav16k, dtype=np.float64).ravel()
     kw = {} if dist_range is None else {"dist_range": dist_range}
@@ -210,7 +212,8 @@ def recover(bundle: dict, role: str) -> str:
 
 # ────────────────────────────── CLI 演示 ──────────────────────────────
 
-def run_pipeline(wav_path: str, outdir: str, device: str = "cuda:0") -> dict:
+def run_pipeline(wav_path: str, outdir: str, device: str | None = None) -> dict:
+    device = pick_device(device)
     wav, sr = sf.read(wav_path)
     wav = np.asarray(wav, dtype=np.float32)
     if wav.ndim > 1:
@@ -259,7 +262,7 @@ def main() -> None:
     d = sub.add_parser("demo", help="protect→publish→listen→recover 一键演示")
     d.add_argument("wav")
     d.add_argument("--outdir", default="data/probe/pipeline")
-    d.add_argument("--device", default="cuda:0")
+    d.add_argument("--device", default=None, help="npu:0 / cuda:0 / cpu；默认自动")
     args = ap.parse_args()
     if args.cmd == "demo":
         s = run_pipeline(args.wav, args.outdir, device=args.device)

@@ -1,0 +1,138 @@
+A1: 50 句
+W1102 22:54:09.095000 33340 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 23840.24it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-large-960h-lv60-self
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/391 [00:00<00:05, 71.73it/s]Loading weights:   4%|▍         | 17/391 [00:00<00:06, 58.42it/s]Loading weights:   7%|▋         | 28/391 [00:00<00:05, 70.77it/s]Loading weights:   9%|▉         | 36/391 [00:00<00:05, 64.77it/s]Loading weights:  12%|█▏        | 48/391 [00:00<00:04, 78.56it/s]Loading weights:  53%|█████▎    | 208/391 [00:00<00:00, 513.86it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 490.91it/s]
+[transformers] [1mBertForTokenClassification LOAD REPORT[0m from: dbmdz/bert-large-cased-finetuned-conll03-english
+Key                      | Status     |  | 
+-------------------------+------------+--+-
+bert.pooler.dense.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+A2 采样：扫描 658 句 → 50 句，敏感词 122 个
+A2: 50 句 / 120 敏感词
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+bitrate_kbps=32: EER=0.0% sim=0.809（ASR 待跑）
+bitrate_kbps=64: EER=0.0% sim=0.900（ASR 待跑）
+bitrate_kbps=128: EER=0.0% sim=0.902（ASR 待跑）
+bitrate_kbps=192: EER=0.0% sim=0.902（ASR 待跑）
+noise_snr_db=0: EER=8.0% sim=0.504（ASR 待跑）
+noise_snr_db=5: EER=3.3% sim=0.602（ASR 待跑）
+noise_snr_db=10: EER=2.4% sim=0.685（ASR 待跑）
+noise_snr_db=20: EER=0.1% sim=0.798（ASR 待跑）
+bandwidth_khz=8.0: EER=3.0% sim=0.657（ASR 待跑）
+bandwidth_khz=11.025: EER=0.0% sim=0.761（ASR 待跑）
+bandwidth_khz=22.05: EER=0.0% sim=0.897（ASR 待跑）
+== ASR 共 1100 项 ==
+  缓存命中 0/1100，待转 1100
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  转写 30/1100（50s，剩 ~1787s）
+  转写 60/1100（126s，剩 ~2192s）
+  转写 90/1100（227s，剩 ~2552s）
+  转写 120/1100（289s，剩 ~2359s）
+  转写 150/1100（350s，剩 ~2218s）
+  转写 180/1100（461s，剩 ~2358s）
+  转写 210/1100（533s，剩 ~2257s）
+  转写 240/1100（578s，剩 ~2071s）
+  转写 270/1100（673s，剩 ~2068s）
+  转写 300/1100（777s，剩 ~2073s）
+  转写 330/1100（828s，剩 ~1933s）
+  转写 360/1100（908s，剩 ~1866s）
+  转写 390/1100（1009s，剩 ~1837s）
+  转写 420/1100（1094s，剩 ~1772s）
+  转写 450/1100（1155s，剩 ~1668s）
+  转写 480/1100（1160s，剩 ~1499s）
+  转写 510/1100（1195s，剩 ~1383s）
+  转写 540/1100（1237s，剩 ~1283s）
+  转写 570/1100（1283s，剩 ~1193s）
+  转写 600/1100（1321s，剩 ~1101s）
+  转写 630/1100（1366s，剩 ~1019s）
+  转写 660/1100（1431s，剩 ~954s）
+  转写 690/1100（1525s，剩 ~906s）
+  转写 720/1100（1586s，剩 ~837s）
+  转写 750/1100（1640s，剩 ~765s）
+  转写 780/1100（1743s，剩 ~715s）
+  转写 810/1100（1819s，剩 ~651s）
+  转写 840/1100（1857s，剩 ~575s）
+  转写 870/1100（1944s，剩 ~514s）
+  转写 900/1100（2041s，剩 ~454s）
+  转写 930/1100（2086s，剩 ~381s）
+  转写 960/1100（2157s，剩 ~315s）
+  转写 990/1100（2251s，剩 ~250s）
+  转写 1020/1100（2309s，剩 ~181s）
+  转写 1050/1100（2363s，剩 ~113s）
+  转写 1080/1100（2475s，剩 ~46s）
+  转写 1100/1100（2526s，剩 ~0s）
+{
+ "bitrate_kbps": {
+  "labels": [
+   "32",
+   "64",
+   "128",
+   "192"
+  ],
+  "wer": [
+   2.08,
+   1.99,
+   1.9,
+   1.99
+  ],
+  "fnr": [
+   0.975,
+   0.975,
+   0.9667,
+   0.9667
+  ]
+ },
+ "noise_snr_db": {
+  "labels": [
+   "0",
+   "5",
+   "10",
+   "20"
+  ],
+  "wer": [
+   50.52,
+   14.79,
+   5.02,
+   1.99
+  ],
+  "fnr": [
+   1.0,
+   1.0,
+   0.975,
+   0.8833
+  ]
+ },
+ "bandwidth_khz": {
+  "labels": [
+   "8.0",
+   "11.025",
+   "22.05"
+  ],
+  "wer": [
+   2.08,
+   2.16,
+   1.99
+  ],
+  "fnr": [
+   0.975,
+   0.9667,
+   0.9667
+  ]
+ }
+}
+-> E:\project\SpeechGuard-Replica\experiments\results\fig_exp9_curves.png

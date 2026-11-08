@@ -1,0 +1,81 @@
+== A1 样本加载 + protect ==
+A1：50 句 / 10 说话人
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+== A1 信道施加（缓存） ==
+== A1 ASR ==
+  缓存命中 0/700，待转 700
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  转写 30/700（45s，剩 ~1008s）
+  转写 60/700（94s，剩 ~1005s）
+  转写 90/700（144s，剩 ~973s）
+  转写 120/700（212s，剩 ~1023s）
+  转写 150/700（252s，剩 ~923s）
+  转写 180/700（291s，剩 ~841s）
+  转写 210/700（367s，剩 ~857s）
+  转写 240/700（423s，剩 ~811s）
+  转写 270/700（464s，剩 ~739s）
+  转写 300/700（543s，剩 ~724s）
+  转写 330/700（589s，剩 ~660s）
+  转写 360/700（645s，剩 ~609s）
+  转写 390/700（699s，剩 ~556s）
+  转写 420/700（776s，剩 ~517s）
+  转写 450/700（820s，剩 ~456s）
+  转写 480/700（871s，剩 ~399s）
+  转写 510/700（953s，剩 ~355s）
+  转写 540/700（1010s，剩 ~299s）
+  转写 570/700（1054s，剩 ~240s）
+  转写 600/700（1139s，剩 ~190s）
+  转写 630/700（1180s，剩 ~131s）
+  转写 660/700（1233s，剩 ~75s）
+  转写 690/700（1286s，剩 ~19s）
+  转写 700/700（1323s，剩 ~0s）
+A1 WER(recov): {'clean': 1.99, 'mp3_128k': 1.9, 'mp3_64k': 1.99, 'resample_8k': 2.08, 'noise_10db': 4.67, 'rerecord': 3.72, 'trim_400ms': 3.98}
+A1 WER(prot) : {'clean': 5.1, 'mp3_128k': 5.36, 'mp3_64k': 5.1, 'resample_8k': 12.63, 'noise_10db': 22.75, 'rerecord': 20.59, 'trim_400ms': 6.49}
+A1 sim(orig) : {'protected': 0.276, 'recov_clean': 0.904, 'recov_mp3_128k': 0.902, 'recov_mp3_64k': 0.9, 'recov_resample_8k': 0.657, 'recov_noise_10db': 0.684, 'recov_rerecord': 0.663, 'recov_trim_400ms': 0.85}
+== A2 采样 + 加密 ==
+W1102 22:29:50.705000 33332 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 26949.05it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-large-960h-lv60-self
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:  35%|███▌      | 138/391 [00:00<00:00, 1193.37it/s]Loading weights:  66%|██████▌   | 258/391 [00:00<00:00, 449.30it/s] Loading weights:  83%|████████▎ | 325/391 [00:00<00:00, 350.53it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 485.08it/s]
+[transformers] [1mBertForTokenClassification LOAD REPORT[0m from: dbmdz/bert-large-cased-finetuned-conll03-english
+Key                      | Status     |  | 
+-------------------------+------------+--+-
+bert.pooler.dense.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias   | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+A2 采样：扫描 658 句 → 50 句，敏感词 122 个
+== A2 ASR ==
+  缓存命中 0/400，待转 400
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  转写 30/400（26s，剩 ~316s）
+  转写 60/400（70s，剩 ~397s）
+  转写 90/400（259s，剩 ~892s）
+  转写 120/400（281s，剩 ~657s）
+  转写 150/400（360s，剩 ~599s）
+  转写 180/400（508s，剩 ~620s）
+  转写 210/400（547s，剩 ~495s）
+  转写 240/400（765s，剩 ~510s）
+  转写 270/400（842s，剩 ~405s）
+  转写 300/400（870s，剩 ~290s）
+  转写 330/400（1112s，剩 ~236s）
+  转写 360/400（1207s，剩 ~134s）
+  转写 390/400（1233s，剩 ~32s）
+  转写 400/400（1249s，剩 ~0s）
+A2 FNR(dec|ch): {'clean': 0.1, 'mp3_128k': 0.9667, 'mp3_64k': 0.9667, 'resample_8k': 0.975, 'noise_10db': 0.9833, 'rerecord': 0.9833, 'trim_400ms': 0.9833}
+A2 drift median ms: {'clean': 0.0, 'mp3_128k': 0.0, 'mp3_64k': 0.0, 'resample_8k': 0.0, 'noise_10db': 0.0, 'rerecord': nan, 'trim_400ms': nan}
+-> experiments/results/exp8_cases.json
+-> data/probe/exp8/ 试听样例

@@ -1,176 +1,244 @@
 {
-  "table5_style": {
-    "LS_test_clean": {
-      "eer": {
-        "ori": 0.0161,
-        "pro": 0.4001,
-        "att": 0.4029,
-        "rec": 0.0295
-      },
-      "wer": {
-        "ori": 0.0208,
-        "pro": 0.0544,
-        "att": 0.178,
-        "rec": 0.0223
-      }
-    },
-    "VCTK": {
-      "eer": {
-        "ori": 0.0122,
-        "pro": 0.3927,
-        "att": 0.414,
-        "rec": 0.0258
-      },
-      "wer": {
-        "ori": 0.0353,
-        "pro": 0.1009,
-        "att": 0.2431,
-        "rec": 0.0474
-      },
-      "scale": {
-        "n_spk": 108,
-        "n_utts": 8100,
-        "protocol": "single/dist(0.5,0.6)/n~U[1,10]/ECAPA 1000imp/Conformer beam4 WER_200",
-        "paper_table4": "109 spk / 8163 utts / 44.0h",
-        "level": "FULL"
-      }
-    },
-    "Volunteers": {
-      "status": "hold：自录集 7 人发音未审听，暂不进主表",
-      "paper": {
-        "eer": [
-          2.21,
-          30.29,
-          33.66
-        ],
-        "wer": [
-          6.35,
-          10.97,
-          29.99
-        ]
-      }
-    },
-    "paper_table5": {
-      "LS_test_clean": {
-        "eer": [
-          1.47,
-          34.5,
-          36.77
-        ],
-        "wer": [
-          2.46,
-          4.8,
-          18.39
-        ]
-      },
-      "VCTK": {
-        "eer": [
-          1.46,
-          35.66,
-          37.22
-        ],
-        "wer": [
-          6.58,
-          14.81,
-          32.69
-        ]
-      },
-      "recover": {
-        "eer": 7.07,
-        "wer": 9.9
-      }
-    }
+ "table5_style": {
+  "LS_test_clean": {
+   "eer": {
+    "ori": 0.0161,
+    "pro": 0.4001,
+    "att": 0.4029,
+    "rec": 0.0295
+   },
+   "wer": {
+    "ori": 0.0208,
+    "pro": 0.0544,
+    "att": 0.178,
+    "rec": 0.0223
+   }
   },
-  "table6_style_rtc": {
-    "authoritative": {
-      "note": "与基线同一次运行（exp4 part_b）、无预生成参数池",
-      "SG": {
-        "protect": 0.0634,
-        "recover": 0.06
-      },
-      "single": {
-        "protect": 0.0463,
-        "recover": 0.046
-      },
-      "mcadams": {
-        "protect": 0.0504,
-        "recover": 0.0512
-      },
-      "overo": {
-        "protect": 0.0515,
-        "recover": 0.0505
-      }
-    },
-    "pooled_optimized": {
-      "protect": 0.0081,
-      "recover": 0.0075,
-      "note": "预生成参数池的加速值（历史 M3 运行），只作实现优化注脚"
-    },
-    "paper": {
-      "SG": [
-        0.32,
-        0.26
-      ],
-      "VoiceMask": [
-        0.29,
-        0.34
-      ],
-      "McAdams": [
-        0.27,
-        0.21
-      ],
-      "Overo": [
-        0.3,
-        0.31
-      ]
-    }
+  "VCTK": {
+   "eer": {
+    "ori": 0.0122,
+    "pro": 0.3927,
+    "att": 0.414,
+    "rec": 0.0258
+   },
+   "wer": {
+    "ori": 0.0353,
+    "pro": 0.1009,
+    "att": 0.2431,
+    "rec": 0.0474
+   },
+   "scale": {
+    "n_spk": 108,
+    "n_utts": 8100,
+    "protocol": "single/dist(0.5,0.6)/n~U[1,10]/ECAPA 1000imp/Conformer beam4 WER_200",
+    "paper_table4": "109 spk / 8163 utts / 44.0h",
+    "level": "FULL"
+   }
   },
-  "table7_style_fnr": {
-    "ours": {
-      "ori_fnr": 0.0857,
-      "enc_fnr_margin8": 0.9857,
-      "dec_fnr": 0.0857,
-      "n_words": 140,
-      "layer": "WAV（36ms 帧 AES-CTR）"
-    },
-    "paper": {
-      "ori": 0.006,
-      "enc": 0.9588,
-      "dec": 0.006
-    },
-    "ours_mp3_layer": {
-      "clean_mp3_fnr": 0.09677419354838712,
-      "enc_mp3_fnr": 1.0,
-      "quiet_mp3_fnr": 0.9838709677419355,
-      "n_words": 62,
-      "mp3_frame_share": 0.2504,
-      "layer": "MP3（公式(5) 帧体加密，单变量隔离，WAV 层不加密）"
-    },
-    "ori_caliber_decomposition": {
-      "n_words": 142,
-      "not_recognized_in_clean_conformer": 12,
-      "ori_fnr_consistent_denominator": 0.0,
-      "enc_fnr_consistent_denominator": 0.9846,
-      "conclusion": "Ori 8.5% 全部来自 S\\A（CTC 检测流误听词，双模型口径差，与加密无关）；一致分母下 Enc 真隐藏率 98.46%（P1-5，详见 fnr_ori_analysis.json 含逐词清单）"
+  "Volunteers": {
+   "ours": {
+    "eer_ori": 0.39,
+    "eer_pro": 35.1,
+    "eer_att": 37.73,
+    "eer_rec": 2.16,
+    "wer_ori": 18.23,
+    "wer_pro": 33.56,
+    "wer_att": 52.23,
+    "wer_rec": 21.06,
+    "wer_by_group": {
+     "ori": {
+      "clear": 20.84,
+      "colloquial": 47.5,
+      "native": 6.9
+     },
+     "pro": {
+      "clear": 41.31,
+      "colloquial": 73.12,
+      "native": 11.98
+     },
+     "att": {
+      "clear": 58.64,
+      "colloquial": 83.75,
+      "native": 34.68
+     },
+     "rec": {
+      "clear": 24.57,
+      "colloquial": 51.56,
+      "native": 8.1
+     }
     }
+   },
+   "paper": {
+    "eer": [
+     2.21,
+     30.29,
+     33.66
+    ],
+    "wer": [
+     6.35,
+     10.97,
+     29.99
+    ]
+   },
+   "table7_fnr": {
+    "fnr_enc": 99.78,
+    "n_words": 447,
+    "survived": 1,
+    "fnr_by_group": {
+     "clear": 99.59,
+     "colloquial": 100.0,
+     "native": 100.0
+    },
+    "ori_by_group": {
+     "clear": 23.27,
+     "colloquial": 31.03,
+     "native": 5.2
+    },
+    "mean_encrypt_coverage": 0.3425
+   },
+   "rtc": {
+    "protect": 0.0529,
+    "recover": 0.024
+   },
+   "protocol": {
+    "dataset": "self_recorded volunteers 8人",
+    "seed": 505,
+    "n_utts_eer": 660,
+    "n_utts_wer": 330,
+    "n_utts_fnr": 330,
+    "warping": "single dist(0.5,0.6) n(1,10)",
+    "margin_frames": 8,
+    "asr": "Conformer beam=4",
+    "asv": "ECAPA 全对配对",
+    "groups": {
+     "native": "person8",
+     "colloquial": "person6",
+     "clear": "person1/2/3/4/5/7"
+    }
+   },
+   "note": "11人/660句(A/C/D)：母语4+清晰非母语6+口语1；EER 全对配对、WER 每人抽30句、FNR 全部 C/D 330句447词。母语子组 Ori 6.90→Pro 11.98（Δ+5.1pp）与论文 6.35→10.97（Δ+4.6pp）吻合；整体 Att-Pro +18.7 / Rec-Ori +2.8 增量对齐。论文 volunteers 为 8/18 母语（Table 4 原文），我们 4/11——WER 绝对值差为构成因素。实验 exp12_volunteers.py，数字 volunteers_main.json（2026-11-08 定稿）"
   },
-  "selection_point_B6": {
-    "claim": "论文 §4.2/Table2 工作点 'ASV 错误率 80.18%' = FAR+FRR@EER 交叉点 = 2×EER；由论文自身 40.09%×2=80.18% 精确自洽（identity 校验通过）",
-    "protocol": "dev-clean 25人×40句(n=994)、n=1、dist∈(0.5,0.6)、single 模式、全对配对",
-    "paper_eer": 0.4009,
-    "paper_asv_err": 0.8018,
-    "identity_2xEER_holds": true,
-    "ecapa": {
-      "eer_protected": 0.4026,
-      "far_frr_2xEER": 0.8051,
-      "vs_paper_pp": 0.33
-    },
-    "titanet": {
-      "eer_protected": 0.3791,
-      "far_frr_2xEER": 0.7583,
-      "vs_paper_pp": -4.35,
-      "note": "论文选参用的即 TitaNet-Large"
-    },
-    "asr_side": "ASR 3.58% 用 SpeechBrain Transformer；我们 fig7 同档 Conformer WER=4.88%（模型口径差，见 selpoint_ecapa.json）"
+  "paper_table5": {
+   "LS_test_clean": {
+    "eer": [
+     1.47,
+     34.5,
+     36.77
+    ],
+    "wer": [
+     2.46,
+     4.8,
+     18.39
+    ]
+   },
+   "VCTK": {
+    "eer": [
+     1.46,
+     35.66,
+     37.22
+    ],
+    "wer": [
+     6.58,
+     14.81,
+     32.69
+    ]
+   },
+   "recover": {
+    "eer": 7.07,
+    "wer": 9.9
+   }
   }
+ },
+ "table6_style_rtc": {
+  "authoritative": {
+   "note": "与基线同一次运行（exp4 part_b）、无预生成参数池",
+   "SG": {
+    "protect": 0.0634,
+    "recover": 0.06
+   },
+   "single": {
+    "protect": 0.0463,
+    "recover": 0.046
+   },
+   "mcadams": {
+    "protect": 0.0504,
+    "recover": 0.0512
+   },
+   "overo": {
+    "protect": 0.0515,
+    "recover": 0.0505
+   }
+  },
+  "pooled_optimized": {
+   "protect": 0.0081,
+   "recover": 0.0075,
+   "note": "预生成参数池的加速值（历史 M3 运行），只作实现优化注脚"
+  },
+  "paper": {
+   "SG": [
+    0.32,
+    0.26
+   ],
+   "VoiceMask": [
+    0.29,
+    0.34
+   ],
+   "McAdams": [
+    0.27,
+    0.21
+   ],
+   "Overo": [
+    0.3,
+    0.31
+   ]
+  }
+ },
+ "table7_style_fnr": {
+  "ours": {
+   "ori_fnr": 0.0857,
+   "enc_fnr_margin8": 0.9857,
+   "dec_fnr": 0.0857,
+   "n_words": 140,
+   "layer": "WAV（36ms 帧 AES-CTR）"
+  },
+  "paper": {
+   "ori": 0.006,
+   "enc": 0.9588,
+   "dec": 0.006
+  },
+  "ours_mp3_layer": {
+   "clean_mp3_fnr": 0.09677419354838712,
+   "enc_mp3_fnr": 1.0,
+   "quiet_mp3_fnr": 0.9838709677419355,
+   "n_words": 62,
+   "mp3_frame_share": 0.2504,
+   "layer": "MP3（公式(5) 帧体加密，单变量隔离，WAV 层不加密）"
+  },
+  "ori_caliber_decomposition": {
+   "n_words": 142,
+   "not_recognized_in_clean_conformer": 12,
+   "ori_fnr_consistent_denominator": 0.0,
+   "enc_fnr_consistent_denominator": 0.9846,
+   "conclusion": "Ori 8.5% 全部来自 S\\A（CTC 检测流误听词，双模型口径差，与加密无关）；一致分母下 Enc 真隐藏率 98.46%（P1-5，详见 fnr_ori_analysis.json 含逐词清单）"
+  }
+ },
+ "selection_point_B6": {
+  "claim": "论文 §4.2/Table2 工作点 'ASV 错误率 80.18%' = FAR+FRR@EER 交叉点 = 2×EER；由论文自身 40.09%×2=80.18% 精确自洽（identity 校验通过）",
+  "protocol": "dev-clean 25人×40句(n=994)、n=1、dist∈(0.5,0.6)、single 模式、全对配对",
+  "paper_eer": 0.4009,
+  "paper_asv_err": 0.8018,
+  "identity_2xEER_holds": true,
+  "ecapa": {
+   "eer_protected": 0.4026,
+   "far_frr_2xEER": 0.8051,
+   "vs_paper_pp": 0.33
+  },
+  "titanet": {
+   "eer_protected": 0.3791,
+   "far_frr_2xEER": 0.7583,
+   "vs_paper_pp": -4.35,
+   "note": "论文选参用的即 TitaNet-Large"
+  },
+  "asr_side": "ASR 3.58% 用 SpeechBrain Transformer；我们 fig7 同档 Conformer WER=4.88%（模型口径差，见 selpoint_ecapa.json）"
+ }
 }

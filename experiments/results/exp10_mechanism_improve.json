@@ -1,0 +1,128 @@
+{
+ "A|single|clean|sim": 0.94,
+ "A|single|trim_400ms|sim": 0.899,
+ "A|ola|clean|sim": 0.899,
+ "A|ola|trim_400ms|sim": 0.516,
+ "A|block|clean|sim": 0.88,
+ "A|block|trim_400ms|sim": 0.462,
+ "A|single|clean|wer": 1.9,
+ "A|single|trim_400ms|wer": 3.55,
+ "A|ola|clean|wer": 1.9,
+ "A|ola|trim_400ms|wer": 36.16,
+ "A|block|clean|wer": 2.08,
+ "A|block|trim_400ms|wer": 56.4,
+ "B_band_evidence": {
+  "mp3_64k": {
+   "0-2k": {
+    "loss_db": -2.9,
+    "spec_corr": 0.973
+   },
+   "2-4k": {
+    "loss_db": -4.9,
+    "spec_corr": 0.701
+   },
+   "4-8k": {
+    "loss_db": -4.9,
+    "spec_corr": 0.803
+   }
+  },
+  "mp3_128k": {
+   "0-2k": {
+    "loss_db": -2.9,
+    "spec_corr": 0.973
+   },
+   "2-4k": {
+    "loss_db": -4.9,
+    "spec_corr": 0.708
+   },
+   "4-8k": {
+    "loss_db": -4.9,
+    "spec_corr": 0.812
+   }
+  },
+  "resample_8k": {
+   "0-2k": {
+    "loss_db": -2.4,
+    "spec_corr": 0.973
+   },
+   "2-4k": {
+    "loss_db": -6.5,
+    "spec_corr": 0.469
+   },
+   "4-8k": {
+    "loss_db": -60.2,
+    "spec_corr": 0.093
+   }
+  },
+  "noise_10db": {
+   "0-2k": {
+    "loss_db": -2.3,
+    "spec_corr": 0.963
+   },
+   "2-4k": {
+    "loss_db": 0.8,
+    "spec_corr": 0.276
+   },
+   "4-8k": {
+    "loss_db": 6.6,
+    "spec_corr": 0.159
+   }
+  },
+  "rerecord": {
+   "0-2k": {
+    "loss_db": -4.5,
+    "spec_corr": 0.716
+   },
+   "2-4k": {
+    "loss_db": -4.3,
+    "spec_corr": 0.54
+   },
+   "4-8k": {
+    "loss_db": -4.2,
+    "spec_corr": 0.608
+   }
+  }
+ },
+ "C|trim_400ms|sim_naive": 0.899,
+ "C|trim_400ms|sim_aligned": 0.913,
+ "C|noise_10db|sim_naive": 0.72,
+ "C|noise_10db|sim_aligned": 0.723,
+ "C|rerecord|sim_naive": 0.696,
+ "C|rerecord|sim_aligned": 0.695,
+ "C|resample_8k|sim_naive": 0.636,
+ "C|resample_8k|sim_aligned": 0.637,
+ "C|trim_400ms|wer_naive": 3.55,
+ "C|trim_400ms|wer_aligned": 3.29,
+ "C|noise_10db|wer_naive": 4.84,
+ "C|noise_10db|wer_aligned": 5.8,
+ "C|rerecord|wer_naive": 4.33,
+ "C|rerecord|wer_aligned": 5.02,
+ "C|resample_8k|wer_naive": 2.34,
+ "C|resample_8k|wer_aligned": 2.25,
+ "D_quiet_survival": [
+  {
+   "file": "1089-134686-0002.flac",
+   "n_spans": 1,
+   "window_rms_db": -41.9,
+   "outside_spec_corr": 0.992
+  },
+  {
+   "file": "1089-134686-0003.flac",
+   "n_spans": 1,
+   "window_rms_db": -24.8,
+   "outside_spec_corr": 0.976
+  },
+  {
+   "file": "1089-134686-0004.flac",
+   "n_spans": 1,
+   "window_rms_db": NaN,
+   "outside_spec_corr": 0.981
+  },
+  {
+   "file": "1188-133604-0000.flac",
+   "n_spans": 1,
+   "window_rms_db": -32.2,
+   "outside_spec_corr": 0.979
+  }
+ ]
+}

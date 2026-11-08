@@ -1,0 +1,127 @@
+utterances: 480 条 / 58.6 min / 8 人
+== protect / attack / recover ==
+  480 句三态生成，76s；RTC protect=0.014 recover=0.006
+== EER（ECAPA 全对配对）==
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+EER Ori/Pro/Att/Rec: {'wav': 0.59, 'prot': 37.57, 'att': 38.59, 'rec': 3.28}
+== WER（Conformer beam=4）==
+  缓存命中 0/240，待转 240
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  30/240（22s，剩 ~154s）
+  60/240（42s，剩 ~127s）
+  90/240（60s，剩 ~99s）
+  120/240（80s，剩 ~80s）
+  150/240（100s，剩 ~60s）
+  180/240（118s，剩 ~39s）
+  210/240（143s，剩 ~20s）
+  240/240（160s，剩 ~0s）
+  WER ori: 22.53%  分组 {'clear': 20.84, 'colloquial': 47.5, 'native': 6.6}
+  缓存命中 0/240，待转 240
+  30/240（24s，剩 ~169s）
+  60/240（47s，剩 ~142s）
+  90/240（65s，剩 ~109s）
+  120/240（88s，剩 ~88s）
+  150/240（111s，剩 ~66s）
+  180/240（130s，剩 ~43s）
+  210/240（156s，剩 ~22s）
+  240/240（174s，剩 ~0s）
+  WER pro: 41.66%  分组 {'clear': 41.31, 'colloquial': 73.12, 'native': 10.56}
+  缓存命中 0/240，待转 240
+  30/240（29s，剩 ~200s）
+  60/240（55s，剩 ~165s）
+  90/240（76s，剩 ~127s）
+  120/240（101s，剩 ~101s）
+  150/240（126s，剩 ~75s）
+  180/240（151s，剩 ~50s）
+  210/240（203s，剩 ~29s）
+  240/240（261s，剩 ~0s）
+  WER att: 59.9%  分组 {'clear': 58.64, 'colloquial': 83.75, 'native': 42.57}
+  缓存命中 0/240，待转 240
+  30/240（86s，剩 ~600s）
+  60/240（154s，剩 ~462s）
+  90/240（222s，剩 ~369s）
+  120/240（298s，剩 ~298s）
+  150/240（370s，剩 ~222s）
+  180/240（441s，剩 ~147s）
+  210/240（536s，剩 ~77s）
+  240/240（602s，剩 ~0s）
+  WER rec: 26.01%  分组 {'clear': 24.57, 'colloquial': 51.56, 'native': 7.92}
+== FNR（Table 7 口径）==
+W1108 14:20:51.465000 21712 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 5036.89it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-large-960h-lv60-self
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:   1%|          | 4/391 [00:00<00:12, 31.28it/s]Loading weights:   2%|▏         | 8/391 [00:00<00:14, 27.01it/s]Loading weights:   3%|▎         | 11/391 [00:00<00:17, 21.81it/s]Loading weights:   4%|▎         | 14/391 [00:00<00:34, 10.87it/s]Loading weights:   4%|▍         | 16/391 [00:01<00:35, 10.59it/s]Loading weights:   5%|▍         | 18/391 [00:01<00:40,  9.12it/s]Loading weights:   5%|▌         | 20/391 [00:01<00:35, 10.50it/s]Loading weights:   6%|▌         | 22/391 [00:01<00:34, 10.63it/s]Loading weights:   6%|▌         | 24/391 [00:01<00:30, 12.14it/s]Loading weights:   7%|▋         | 26/391 [00:02<00:38,  9.41it/s]Loading weights:   8%|▊         | 33/391 [00:02<00:18, 18.96it/s]Loading weights:   9%|▉         | 36/391 [00:02<00:17, 20.57it/s]Loading weights:  10%|▉         | 39/391 [00:02<00:18, 19.41it/s]Loading weights:  11%|█         | 42/391 [00:03<00:25, 13.56it/s]Loading weights:  11%|█▏        | 44/391 [00:03<00:31, 11.17it/s]Loading weights:  12%|█▏        | 47/391 [00:03<00:31, 10.97it/s]Loading weights:  13%|█▎        | 49/391 [00:03<00:30, 11.07it/s]Loading weights: 100%|██████████| 391/391 [00:03<00:00, 101.37it/s]
+[transformers] [1mBertForTokenClassification LOAD REPORT[0m from: dbmdz/bert-large-cased-finetuned-conll03-english
+Key                      | Status     |  | 
+-------------------------+------------+--+-
+bert.pooler.dense.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+  检测：240 句 / 316 敏感词，平均加密覆盖 20.6%
+  缓存命中 0/240，待转 240
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  30/240（114s，剩 ~795s）
+  60/240（192s，剩 ~575s）
+  90/240（210s，剩 ~350s）
+  120/240（301s，剩 ~301s）
+  150/240（390s，剩 ~234s）
+  180/240（460s，剩 ~153s）
+  210/240（547s，剩 ~78s）
+  240/240（623s，剩 ~0s）
+  缓存命中 0/240，待转 240
+  30/240（108s，剩 ~758s）
+  60/240（192s，剩 ~577s）
+  90/240（213s，剩 ~356s）
+  120/240（235s，剩 ~235s）
+  150/240（257s，剩 ~154s）
+  180/240（275s，剩 ~92s）
+  210/240（297s，剩 ~42s）
+  240/240（315s，剩 ~0s）
+FNR Enc=99.68%（315/316 隐藏；分组 {'clear': 99.59, 'colloquial': 100.0, 'native': 100.0}）
+Ori 基线（同分母）分组 {'clear': 23.27, 'colloquial': 31.03, 'native': 9.52}
+{
+ "eer_ori": 0.59,
+ "eer_pro": 37.57,
+ "eer_att": 38.59,
+ "eer_rec": 3.28,
+ "wer_ori": 22.53,
+ "wer_pro": 41.66,
+ "wer_att": 59.9,
+ "wer_rec": 26.01,
+ "wer_by_group": {
+  "ori": {
+   "clear": 20.84,
+   "colloquial": 47.5,
+   "native": 6.6
+  },
+  "pro": {
+   "clear": 41.31,
+   "colloquial": 73.12,
+   "native": 10.56
+  },
+  "att": {
+   "clear": 58.64,
+   "colloquial": 83.75,
+   "native": 42.57
+  },
+  "rec": {
+   "clear": 24.57,
+   "colloquial": 51.56,
+   "native": 7.92
+  }
+ }
+}
+-> volunteers_main.json；试听样例 -> E:\project\SpeechGuard-Replica\data\probe\volunteers

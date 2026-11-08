@@ -1,0 +1,52 @@
+== 样本 + 三模式 protect ==
+50 句
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+== A 机理：模式×trim ==
+  缓存命中 300/300，待转 0
+{'A|single|clean|sim': 0.94, 'A|single|trim_400ms|sim': 0.899, 'A|ola|clean|sim': 0.899, 'A|ola|trim_400ms|sim': 0.516, 'A|block|clean|sim': 0.88, 'A|block|trim_400ms|sim': 0.462, 'A|single|clean|wer': 1.9, 'A|single|trim_400ms|wer': 3.55, 'A|ola|clean|wer': 1.9, 'A|ola|trim_400ms|wer': 36.16, 'A|block|clean|wer': 2.08, 'A|block|trim_400ms|wer': 56.4}
+== B 机理：分带能量 ==
+{"mp3_64k": {"0-2k": {"loss_db": -2.9, "spec_corr": 0.973}, "2-4k": {"loss_db": -4.9, "spec_corr": 0.701}, "4-8k": {"loss_db": -4.9, "spec_corr": 0.803}}, "mp3_128k": {"0-2k": {"loss_db": -2.9, "spec_corr": 0.973}, "2-4k": {"loss_db": -4.9, "spec_corr": 0.708}, "4-8k": {"loss_db": -4.9, "spec_corr": 0.812}}, "resample_8k": {"0-2k": {"loss_db": -2.4, "spec_corr": 0.973}, "2-4k": {"loss_db": -6.5, "spec_corr": 0.469}, "4-8k": {"loss_db": -60.2, "spec_corr": 0.093}}, "noise_10db": {"0-2k": {"loss_db": -2.3, "spec_corr": 0.963}, "2-4k": {"loss_db": 0.8, "spec_corr": 0.276}, "4-8k": {"loss_db": 6.6, "spec_corr": 0.159}}, "rerecord": {"0-2k": {"loss_db": -4.5, "spec_corr": 0.716}, "2-4k": {"loss_db": -4.3, "spec_corr": 0.54}, "4-8k": {"loss_db": -4.2, "spec_corr": 0.608}}}
+== C 改进：预对齐（含同种子未对齐基线） ==
+  缓存命中 0/400，待转 400
+E:\Miniconda\envs\speechguard\lib\site-packages\torch\nn\functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+  转写 30/400（42s，剩 ~515s）
+  转写 60/400（102s，剩 ~576s）
+  转写 90/400（139s，剩 ~479s）
+  转写 120/400（201s，剩 ~468s）
+  转写 150/400（258s，剩 ~429s）
+  转写 180/400（306s，剩 ~374s）
+  转写 210/400（369s，剩 ~333s）
+  转写 240/400（407s，剩 ~271s）
+  转写 270/400（473s，剩 ~228s）
+  转写 300/400（532s，剩 ~177s）
+  转写 330/400（584s，剩 ~124s）
+  转写 360/400（640s，剩 ~71s）
+  转写 390/400（683s，剩 ~18s）
+  转写 400/400（718s，剩 ~0s）
+{'C|trim_400ms|sim_naive': 0.899, 'C|trim_400ms|sim_aligned': 0.913, 'C|noise_10db|sim_naive': 0.72, 'C|noise_10db|sim_aligned': 0.723, 'C|rerecord|sim_naive': 0.696, 'C|rerecord|sim_aligned': 0.695, 'C|resample_8k|sim_naive': 0.636, 'C|resample_8k|sim_aligned': 0.637, 'C|trim_400ms|wer_naive': 3.55, 'C|trim_400ms|wer_aligned': 3.29, 'C|noise_10db|wer_naive': 4.84, 'C|noise_10db|wer_aligned': 5.8, 'C|rerecord|wer_naive': 4.33, 'C|rerecord|wer_aligned': 5.02, 'C|resample_8k|wer_naive': 2.34, 'C|resample_8k|wer_aligned': 2.25}
+== D 改进：quiet 版存活 ==
+W1103 00:39:27.052000 12392 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 61976.13it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-large-960h-lv60-self
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:   2%|▏         | 7/391 [00:00<00:06, 58.01it/s]Loading weights:   5%|▍         | 18/391 [00:00<00:04, 77.13it/s]Loading weights:   8%|▊         | 30/391 [00:00<00:04, 89.32it/s]Loading weights:  10%|▉         | 39/391 [00:00<00:05, 68.03it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 703.12it/s]
+[transformers] [1mBertForTokenClassification LOAD REPORT[0m from: dbmdz/bert-large-cased-finetuned-conll03-english
+Key                      | Status     |  | 
+-------------------------+------------+--+-
+bert.pooler.dense.bias   | UNEXPECTED |  | 
+bert.pooler.dense.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[{"file": "1089-134686-0002.flac", "n_spans": 1, "window_rms_db": -41.9, "outside_spec_corr": 0.992}, {"file": "1089-134686-0003.flac", "n_spans": 1, "window_rms_db": -24.8, "outside_spec_corr": 0.976}, {"file": "1089-134686-0004.flac", "n_spans": 1, "window_rms_db": NaN, "outside_spec_corr": 0.981}, {"file": "1188-133604-0000.flac", "n_spans": 1, "window_rms_db": -32.2, "outside_spec_corr": 0.979}]
+-> experiments/results/exp10_mechanism_improve.json

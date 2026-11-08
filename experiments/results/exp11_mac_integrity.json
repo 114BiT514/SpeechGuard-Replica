@@ -1,0 +1,123 @@
+{
+ "protocol": {
+  "channels": [
+   "clean",
+   "noise_20db",
+   "noise_10db"
+  ],
+  "margin_frames": 8,
+  "mac": "SHA256(明文)[:4] per span, fail->silence",
+  "asr": "Conformer beam=4",
+  "fix_note": "v2：float->int16 改 round(*32768) 保证 clean 逐字节精确（v1 用 *32767 截断，1-LSB 扰动令 MAC 连合法解密也全拒）"
+ },
+ "fnr": {
+  "clean": {
+   "naive": {
+    "total": 120,
+    "survived": 109,
+    "fnr": 0.0917,
+    "survivors_sample": [
+     "MUSIC",
+     "SHELLEY'S",
+     "FRANCIS",
+     "FRANCIS",
+     "MARCH",
+     "IRELAND",
+     "IRISH",
+     "SEA",
+     "STEPHANOS",
+     "HELLO"
+    ]
+   },
+   "mac": {
+    "total": 120,
+    "survived": 109,
+    "fnr": 0.0917,
+    "survivors_sample": [
+     "MUSIC",
+     "SHELLEY'S",
+     "FRANCIS",
+     "FRANCIS",
+     "MARCH",
+     "IRELAND",
+     "IRISH",
+     "SEA",
+     "STEPHANOS",
+     "HELLO"
+    ]
+   }
+  },
+  "noise_20db": {
+   "naive": {
+    "total": 120,
+    "survived": 14,
+    "fnr": 0.8833,
+    "survivors_sample": [
+     "HELLO",
+     "ELECTION",
+     "WIZARD",
+     "ROMAN",
+     "FAITH",
+     "LARGE",
+     "OPEN",
+     "WIDE",
+     "YORK",
+     "NEW"
+    ]
+   },
+   "mac": {
+    "total": 120,
+    "survived": 2,
+    "fnr": 0.9833,
+    "survivors_sample": [
+     "WIZARD",
+     "LAMP"
+    ]
+   }
+  },
+  "noise_10db": {
+   "naive": {
+    "total": 120,
+    "survived": 3,
+    "fnr": 0.975,
+    "survivors_sample": [
+     "LARGE",
+     "OPEN",
+     "ROAD"
+    ]
+   },
+   "mac": {
+    "total": 120,
+    "survived": 0,
+    "fnr": 1.0,
+    "survivors_sample": []
+   }
+  }
+ },
+ "quiet_core_silence": [
+  {
+   "file": "1089-134686-0005.flac",
+   "core_rms_db": -240.0
+  },
+  {
+   "file": "1089-134691-0016.flac",
+   "core_rms_db": -240.0
+  },
+  {
+   "file": "1089-134691-0017.flac",
+   "core_rms_db": -240.0
+  },
+  {
+   "file": "1089-134691-0020.flac",
+   "core_rms_db": -240.0
+  },
+  {
+   "file": "1089-134691-0025.flac",
+   "core_rms_db": -240.0
+  },
+  {
+   "file": "1188-133604-0019.flac",
+   "core_rms_db": -240.0
+  }
+ ]
+}

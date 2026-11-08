@@ -493,7 +493,16 @@ def _sentence_windows(sent, wav, nf_db):
             lo = _boundary(pt1, t0, gaps)
         else:
             lo = t0 - 0.5
-        hi = _boundary(t1, have[i + 1][2], gaps) if i + 1 < len(have) else t1 + 1.5
+        if i + 1 < len(have):
+            hi = _boundary(t1, have[i + 1][2], gaps)
+        else:
+            # 段末句无上句可借：吸附到 t1 之后第一段静音中心（否则 t1 被 CTC
+            # 尾部拉伸时会把段后朗读吞进窗口）
+            hi = t1 + 1.5
+            for gs, ge in gaps:
+                if gs >= t1 - 0.2:
+                    hi = (gs + ge) / 2
+                    break
         lo = max(lo, t0 - 2.5)                       # 防上句 t1 拉伸过头吞并本句
         cap = 60.0 if part == "B" else 12.0          # 防 t1 拉伸把下句圈进来
         hi = min(max(hi, t1), t0 + cap)
@@ -562,7 +571,7 @@ def main():
     ap.add_argument("--conformer", action="store_true",
                     help="追加：A/C/D 逐句切段跑 Conformer（论文评估模型）交叉验证")
     ap.add_argument("--persons", default=None,
-                    help="逗号分隔的人名过滤（如 person4,person9），默认全部")
+                    help="逗号分隔的人名过滤（如 person3,person8），默认全部")
     args = ap.parse_args()
 
     people = sorted(f[:-4] for f in os.listdir(OUT16K) if f.endswith(".wav"))

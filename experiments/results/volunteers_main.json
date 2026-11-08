@@ -1,0 +1,70 @@
+{
+ "protocol": {
+  "dataset": "self_recorded volunteers 8人",
+  "seed": 505,
+  "n_utts_eer": 660,
+  "n_utts_wer": 330,
+  "n_utts_fnr": 330,
+  "warping": "single dist(0.5,0.6) n(1,10)",
+  "margin_frames": 8,
+  "asr": "Conformer beam=4",
+  "asv": "ECAPA 全对配对",
+  "groups": {
+   "native": "person8",
+   "colloquial": "person6",
+   "clear": "person1/2/3/4/5/7"
+  }
+ },
+ "table5_row": {
+  "eer_ori": 0.39,
+  "eer_pro": 35.1,
+  "eer_att": 37.73,
+  "eer_rec": 2.16,
+  "wer_ori": 18.23,
+  "wer_pro": 33.56,
+  "wer_att": 52.23,
+  "wer_rec": 21.06,
+  "wer_by_group": {
+   "ori": {
+    "clear": 20.84,
+    "colloquial": 47.5,
+    "native": 6.9
+   },
+   "pro": {
+    "clear": 41.31,
+    "colloquial": 73.12,
+    "native": 11.98
+   },
+   "att": {
+    "clear": 58.64,
+    "colloquial": 83.75,
+    "native": 34.68
+   },
+   "rec": {
+    "clear": 24.57,
+    "colloquial": 51.56,
+    "native": 8.1
+   }
+  }
+ },
+ "table7_row": {
+  "fnr_enc": 99.78,
+  "n_words": 447,
+  "survived": 1,
+  "fnr_by_group": {
+   "clear": 99.59,
+   "colloquial": 100.0,
+   "native": 100.0
+  },
+  "ori_by_group": {
+   "clear": 23.27,
+   "colloquial": 31.03,
+   "native": 5.2
+  },
+  "mean_encrypt_coverage": 0.3425
+ },
+ "rtc": {
+  "protect": 0.0529,
+  "recover": 0.024
+ }
+}

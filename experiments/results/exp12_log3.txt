@@ -1,0 +1,75 @@
+utterances: 660 条 / 78.6 min / 11 人
+== protect / attack / recover ==
+  660 句三态生成，324s；RTC protect=0.053 recover=0.024
+== EER（ECAPA 全对配对）==
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+E:\Miniconda\envs\speechguard\lib\site-packages\speechbrain\utils\torch_audio_backend.py:64: UserWarning: torchaudio._backend.list_audio_backends has been deprecated. This deprecation is part of a large refactoring effort to transition TorchAudio into a maintenance phase. The decoding and encoding capabilities of PyTorch for both audio and video are being consolidated into TorchCodec. Please see https://github.com/pytorch/audio/issues/3902 for more information. It will be removed from the 2.9 release. 
+  available_backends = torchaudio.list_audio_backends()
+EER Ori/Pro/Att/Rec: {'wav': 0.39, 'prot': 35.1, 'att': 37.73, 'rec': 2.16}
+== WER（Conformer beam=4）==
+  缓存命中 330/330，待转 0
+  WER ori: 18.23%  分组 {'clear': 20.84, 'colloquial': 47.5, 'native': 6.9}
+  缓存命中 330/330，待转 0
+  WER pro: 33.56%  分组 {'clear': 41.31, 'colloquial': 73.12, 'native': 11.98}
+  缓存命中 330/330，待转 0
+  WER att: 52.23%  分组 {'clear': 58.64, 'colloquial': 83.75, 'native': 34.68}
+  缓存命中 330/330，待转 0
+  WER rec: 21.06%  分组 {'clear': 24.57, 'colloquial': 51.56, 'native': 8.1}
+== FNR（Table 7 口径）==
+W1108 16:42:24.451000 39604 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 5858.51it/s]
+[transformers] [1mWav2Vec2ForCTC LOAD REPORT[0m from: facebook/wav2vec2-large-960h-lv60-self
+Key                        | Status  | 
+---------------------------+---------+-
+wav2vec2.masked_spec_embed | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights:   1%|          | 2/391 [00:00<00:20, 19.08it/s]Loading weights:   1%|          | 4/391 [00:00<00:25, 15.30it/s]Loading weights:   2%|▏         | 6/391 [00:00<00:26, 14.80it/s]Loading weights:   3%|▎         | 11/391 [00:00<00:19, 19.74it/s]Loading weights:   3%|▎         | 13/391 [00:00<00:23, 15.84it/s]Loading weights:   4%|▍         | 17/391 [00:00<00:19, 19.45it/s]Loading weights:   9%|▉         | 35/391 [00:01<00:06, 55.07it/s]Loading weights:  11%|█         | 42/391 [00:01<00:08, 39.20it/s]Loading weights:  12%|█▏        | 48/391 [00:01<00:08, 42.39it/s]Loading weights: 100%|██████████| 391/391 [00:01<00:00, 256.69it/s]
+[transformers] [1mBertForTokenClassification LOAD REPORT[0m from: dbmdz/bert-large-cased-finetuned-conll03-english
+Key                      | Status     |  | 
+-------------------------+------------+--+-
+bert.pooler.dense.weight | UNEXPECTED |  | 
+bert.pooler.dense.bias   | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+  检测：330 句 / 447 敏感词，平均加密覆盖 21.4%
+  缓存命中 330/330，待转 0
+  缓存命中 330/330，待转 0
+FNR Enc=99.78%（446/447 隐藏；分组 {'clear': 99.59, 'colloquial': 100.0, 'native': 100.0}）
+Ori 基线（同分母）分组 {'clear': 23.27, 'colloquial': 31.03, 'native': 5.2}
+{
+ "eer_ori": 0.39,
+ "eer_pro": 35.1,
+ "eer_att": 37.73,
+ "eer_rec": 2.16,
+ "wer_ori": 18.23,
+ "wer_pro": 33.56,
+ "wer_att": 52.23,
+ "wer_rec": 21.06,
+ "wer_by_group": {
+  "ori": {
+   "clear": 20.84,
+   "colloquial": 47.5,
+   "native": 6.9
+  },
+  "pro": {
+   "clear": 41.31,
+   "colloquial": 73.12,
+   "native": 11.98
+  },
+  "att": {
+   "clear": 58.64,
+   "colloquial": 83.75,
+   "native": 34.68
+  },
+  "rec": {
+   "clear": 24.57,
+   "colloquial": 51.56,
+   "native": 8.1
+  }
+ }
+}
+-> volunteers_main.json；试听样例 -> E:\project\SpeechGuard-Replica\data\probe\volunteers

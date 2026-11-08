@@ -1,0 +1,291 @@
+{
+ "protocol": {
+  "dataset": "LibriSpeech test-clean",
+  "seed": 808,
+  "warping": "single dist(0.5,0.6) n(1,10)",
+  "margin_frames": 8,
+  "asr": "Conformer beam=4",
+  "asv": "ECAPA cosine",
+  "channels": [
+   "clean",
+   "mp3_128k",
+   "mp3_64k",
+   "resample_8k",
+   "noise_10db",
+   "rerecord",
+   "trim_400ms"
+  ],
+  "note": "mp3 为计划允许的低码率重编码代理（微信语音 Silk/AMR 无编码器可用）"
+ },
+ "A1": {
+  "n_utts": 50,
+  "n_speakers": 10,
+  "sim_to_original": {
+   "protected": 0.276,
+   "recov_clean": 0.904,
+   "recov_mp3_128k": 0.902,
+   "recov_mp3_64k": 0.9,
+   "recov_resample_8k": 0.657,
+   "recov_noise_10db": 0.684,
+   "recov_rerecord": 0.663,
+   "recov_trim_400ms": 0.85
+  },
+  "wer_recovered": {
+   "clean": 1.99,
+   "mp3_128k": 1.9,
+   "mp3_64k": 1.99,
+   "resample_8k": 2.08,
+   "noise_10db": 4.67,
+   "rerecord": 3.72,
+   "trim_400ms": 3.98
+  },
+  "wer_protected": {
+   "clean": 5.1,
+   "mp3_128k": 5.36,
+   "mp3_64k": 5.1,
+   "resample_8k": 12.63,
+   "noise_10db": 22.75,
+   "rerecord": 20.59,
+   "trim_400ms": 6.49
+  }
+ },
+ "A2": {
+  "n_utts": 50,
+  "margin_frames": 8,
+  "fnr_after_decrypt": {
+   "clean": {
+    "total": 120,
+    "survived": 108,
+    "fnr": 0.1,
+    "survivors": [
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0005.flac",
+      "word": "MUSIC"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0005.flac",
+      "word": "SHELLEY'S"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0033.flac",
+      "word": "FRANCIS"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0036.flac",
+      "word": "FRANCIS"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0016.flac",
+      "word": "IRELAND"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0016.flac",
+      "word": "MARCH"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0017.flac",
+      "word": "IRISH"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0017.flac",
+      "word": "SEA"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0020.flac",
+      "word": "HELLO"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0025.flac",
+      "word": "CITY"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0025.flac",
+      "word": "DANES"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0019.flac",
+      "word": "CHARACTERISTIC"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0019.flac",
+      "word": "GOTHIC"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1188\\133604\\1188-133604-0019.flac",
+      "word": "ILL"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1221\\135767\\1221-135767-0000.flac",
+      "word": "ELECTION"
+     }
+    ]
+   },
+   "mp3_128k": {
+    "total": 120,
+    "survived": 4,
+    "fnr": 0.9667,
+    "survivors": [
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac",
+      "word": "WIZARD"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2094\\142345\\2094-142345-0009.flac",
+      "word": "OPEN"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2300\\131720\\2300-131720-0026.flac",
+      "word": "LAMP"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\237\\134493\\237-134493-0016.flac",
+      "word": "ROAD"
+     }
+    ]
+   },
+   "mp3_64k": {
+    "total": 120,
+    "survived": 4,
+    "fnr": 0.9667,
+    "survivors": [
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac",
+      "word": "WIZARD"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2094\\142345\\2094-142345-0009.flac",
+      "word": "OPEN"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2300\\131720\\2300-131720-0026.flac",
+      "word": "LAMP"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\237\\134493\\237-134493-0016.flac",
+      "word": "ROAD"
+     }
+    ]
+   },
+   "resample_8k": {
+    "total": 120,
+    "survived": 3,
+    "fnr": 0.975,
+    "survivors": [
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac",
+      "word": "WIZARD"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2094\\142345\\2094-142345-0009.flac",
+      "word": "OPEN"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2300\\131720\\2300-131720-0026.flac",
+      "word": "LAMP"
+     }
+    ]
+   },
+   "noise_10db": {
+    "total": 120,
+    "survived": 2,
+    "fnr": 0.9833,
+    "survivors": [
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2094\\142345\\2094-142345-0003.flac",
+      "word": "LARGE"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\237\\134493\\237-134493-0016.flac",
+      "word": "ROAD"
+     }
+    ]
+   },
+   "rerecord": {
+    "total": 120,
+    "survived": 2,
+    "fnr": 0.9833,
+    "survivors": [
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac",
+      "word": "WIZARD"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2300\\131720\\2300-131720-0026.flac",
+      "word": "LAMP"
+     }
+    ]
+   },
+   "trim_400ms": {
+    "total": 120,
+    "survived": 2,
+    "fnr": 0.9833,
+    "survivors": [
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\1284\\1181\\1284-1181-0017.flac",
+      "word": "WIZARD"
+     },
+     {
+      "utt": "data\\librispeech\\LibriSpeech\\test-clean\\2300\\131720\\2300-131720-0026.flac",
+      "word": "LAMP"
+     }
+    ]
+   }
+  },
+  "drift_ms": {
+   "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0005.flac": {
+    "clean": 0.0,
+    "mp3_128k": 0.0,
+    "mp3_64k": 0.0,
+    "resample_8k": 0.0,
+    "noise_10db": 0.0,
+    "rerecord": 9.7,
+    "trim_400ms": -400.0
+   },
+   "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0033.flac": {
+    "clean": 0.0,
+    "mp3_128k": 0.0,
+    "mp3_64k": 0.0,
+    "resample_8k": 0.0,
+    "noise_10db": 0.0,
+    "rerecord": 408.5,
+    "trim_400ms": -400.0
+   },
+   "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134686\\1089-134686-0036.flac": {
+    "clean": 0.0,
+    "mp3_128k": 0.0,
+    "mp3_64k": 0.0,
+    "resample_8k": 0.0,
+    "noise_10db": 0.0,
+    "rerecord": 9.9,
+    "trim_400ms": -400.0
+   },
+   "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0016.flac": {
+    "clean": 0.0,
+    "mp3_128k": 0.0,
+    "mp3_64k": 0.0,
+    "resample_8k": 0.0,
+    "noise_10db": 0.0,
+    "rerecord": 0.9,
+    "trim_400ms": -400.0
+   },
+   "data\\librispeech\\LibriSpeech\\test-clean\\1089\\134691\\1089-134691-0017.flac": {
+    "clean": 0.0,
+    "mp3_128k": 0.0,
+    "mp3_64k": 0.0,
+    "resample_8k": 0.0,
+    "noise_10db": 0.0,
+    "rerecord": 18.5,
+    "trim_400ms": -400.0
+   }
+  },
+  "drift_median_ms": {
+   "clean": 0.0,
+   "mp3_128k": 0.0,
+   "mp3_64k": 0.0,
+   "resample_8k": 0.0,
+   "noise_10db": 0.0,
+   "rerecord": NaN,
+   "trim_400ms": NaN
+  }
+ }
+}
